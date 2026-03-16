@@ -3,6 +3,7 @@ title: Designing a Notion–Linear Sync Engine That Could Actually Be Trusted
 summary: A deep dive into the architecture and design decisions behind a bidirectional sync engine that keeps Notion and Linear in sync reliably over time.
 publishedAt: 2026-03-16
 updatedAt: 2026-03-16
+status: draft
 tags:
   - systems
   - notion

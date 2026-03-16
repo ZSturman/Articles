@@ -1,0 +1,86 @@
+name: Publish Articles
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Article slug to publish (or 'all' for all unpublished)"
+        required: false
+        default: "all"
+      dry_run:
+        description: "Dry run (no API calls)"
+        type: boolean
+        default: false
+      platforms:
+        description: "Comma-separated platforms (devto,hashnode,medium) or 'all'"
+        required: false
+        default: "all"
+      force:
+        description: "Force re-publish even if unchanged"
+        type: boolean
+        default: false
+
+  # Uncomment to auto-publish on push to main:
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - '*/index.md'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build publish command
+        id: cmd
+        run: |
+          CMD="python -m publish"
+          SLUG="${{ github.event.inputs.slug }}"
+          if [ "$SLUG" = "all" ] || [ -z "$SLUG" ]; then
+            CMD="$CMD --all"
+          else
+            CMD="$CMD $SLUG"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            CMD="$CMD --dry-run"
+          fi
+          PLATFORMS="${{ github.event.inputs.platforms }}"
+          if [ -n "$PLATFORMS" ] && [ "$PLATFORMS" != "all" ]; then
+            CMD="$CMD --platform $PLATFORMS"
+          fi
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            CMD="$CMD --force"
+          fi
+          echo "cmd=$CMD" >> "$GITHUB_OUTPUT"
+
+      - name: Run publish
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          HASHNODE_TOKEN: ${{ secrets.HASHNODE_TOKEN }}
+          HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
+          MEDIUM_TOKEN: ${{ secrets.MEDIUM_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_BRANCH: ${{ github.ref_name }}
+        run: ${{ steps.cmd.outputs.cmd }} --verbose
+
+      - name: Commit publish state
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .publish-state.json
+          git diff --cached --quiet || git commit -m "Update publish state [skip ci]"
+          git push
