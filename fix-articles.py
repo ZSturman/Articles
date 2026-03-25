@@ -16,6 +16,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+from datetime import date
 import os
 import re
 import shutil
@@ -33,7 +34,7 @@ MARKDOWN_FILE_EXTS = {".md", ".markdown"}
 FRONTMATTER_BOUNDARY = "---"
 
 # Required by SYNC-ARTICLES.py
-REQUIRED_FIELDS = ["title", "summary", "publishedAt"]
+REQUIRED_FIELDS = ["title", "summary"]
 
 # Notion metadata keys that map to frontmatter fields
 NOTION_KEY_MAP = {
@@ -480,6 +481,14 @@ def fix_article(article: Dict[str, Any], *, dry_run: bool) -> Tuple[List[str], L
                             f"you must add it manually to the frontmatter"
                         )
 
+                # Auto-add updatedAt if neither publishedAt nor updatedAt exists
+                has_published = any(k.lower() == "publishedat" for k in fm)
+                has_updated = any(k.lower() == "updatedat" for k in fm)
+                if not has_published and not has_updated:
+                    today = date.today().isoformat()
+                    fm["updatedAt"] = today
+                    actions.append(f"Added updatedAt: {today} (no date field found)")
+
                 fm_text = _serialize_frontmatter(fm)
                 clean_text = fm_text + "\n\n" + body
                 content_changed = True
@@ -488,6 +497,27 @@ def fix_article(article: Dict[str, Any], *, dry_run: bool) -> Tuple[List[str], L
                 "File is missing frontmatter (does not start with ---) and "
                 "does not look like a recognisable Notion export"
             )
+
+    # ── 4b. Auto-add updatedAt to existing frontmatter if no date field ──
+    if clean_text.startswith(FRONTMATTER_BOUNDARY):
+        normalized = clean_text.replace("\r\n", "\n")
+        lines = normalized.split("\n")
+        closing_idx = None
+        for idx, line in enumerate(lines[1:], start=1):
+            if line.strip() == FRONTMATTER_BOUNDARY:
+                closing_idx = idx
+                break
+        if closing_idx is not None:
+            fm_block = "\n".join(lines[1:closing_idx])
+            fm_lower = fm_block.lower()
+            has_pub = "publishedat:" in fm_lower
+            has_upd = "updatedat:" in fm_lower
+            if not has_pub and not has_upd:
+                today = date.today().isoformat()
+                lines.insert(closing_idx, f"updatedAt: {today}")
+                clean_text = "\n".join(lines)
+                content_changed = True
+                actions.append(f"Added updatedAt: {today} (no date field found)")
 
     # ── 5. Fix broken media paths ────────────────────────────────────────
     rewritten, media_fixes, media_missing = _fix_media_paths_in_markdown(

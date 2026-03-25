@@ -23,6 +23,7 @@ body set: Yes
 closing set: Yes
 cta set: Yes
 finalized: Yes
+updatedAt: 2026-03-25
 ---
 
 Planning often starts in Notion because it is flexible and easy to shape around a team’s workflow. Execution often moves into Linear because it is structured, fast, and better at handling active delivery. That split works for a while, until the same projects, milestones, and tasks start living in both places and slowly drift out of sync.

@@ -27,7 +27,7 @@ MARKDOWN_INDEX_NAMES = {"index.md", "index.markdown"}
 MARKDOWN_FILE_EXTS = {".md", ".markdown"}
 FRONTMATTER_BOUNDARY = "---"
 
-REQUIRED_FRONTMATTER_FIELDS = ["title", "summary", "publishedAt"]
+REQUIRED_FRONTMATTER_FIELDS = ["title", "summary"]
 
 # Directories / files that are never articles
 IGNORED_NAMES = {
@@ -251,6 +251,11 @@ def validate_frontmatter(metadata: Dict[str, Any], slug: str) -> List[str]:
             errors.append(f"Missing required frontmatter field: {field}")
         elif isinstance(val, str) and not val.strip():
             errors.append(f"Frontmatter field \"{field}\" is present but empty")
+    # At least one date field required
+    has_published = metadata.get("publishedAt") and str(metadata["publishedAt"]).strip()
+    has_updated = metadata.get("updatedAt") and str(metadata["updatedAt"]).strip()
+    if not has_published and not has_updated:
+        errors.append("Missing required frontmatter: need at least publishedAt or updatedAt")
     # Optional field type checks
     tags = metadata.get("tags")
     if tags is not None and not isinstance(tags, list):
