@@ -1,21 +1,21 @@
-# Automating Linear From Notion
-
-action required: [🟡 Schedule
+---
+title: Automating Linear From Notion
+action required: "[🟡 Schedule"
 status: ready to publish
 scheduled: No
-platform: DEV, Hashnode, Hashnoon, Medium
-link to repo: https://github.com/ZSturman/Linear-Notion-Sync
-projects: Notion as a Source of Truth (https://www.notion.so/Notion-as-a-Source-of-Truth-304aec944d3c8029a1b1ea0f92487137?pvs=21)
+platform: [DEV, Hashnode, Hashnoon, Medium]
+link to repo: "https://github.com/ZSturman/Linear-Notion-Sync"
+projects: "Notion as a Source of Truth (https://www.notion.so/Notion-as-a-Source-of-Truth-304aec944d3c8029a1b1ea0f92487137?pvs=21)"
 cover image: Automating%20Linear%20From%20Notion/Cover.png
 summary: A bidirectional sync engine that keeps Notion and Linear aligned by normalizing their data into shared models, reconciling meaningful changes, and preserving relationships and identity across systems.
-tags: API Integration, Automation, Linear, Notion, Python, State Management, Systems Design
+tags: [API Integration, Automation, Linear, Notion, Python, State Management, Systems Design]
 series: Notion as a Source of Truth
 posted: No
 to review: 0
 to draft: 0
 in review: 0/7
 drafting: 0/7
-versions: Automating Linear From Notion (https://www.notion.so/Automating-Linear-From-Notion-327aec944d3c80028936cb58f46855be?pvs=21), Notion and Linear overlap just enough to create a real problem. (https://www.notion.so/Notion-and-Linear-overlap-just-enough-to-create-a-real-problem-327aec944d3c80a4976dee4a979f7d24?pvs=21), Notion and Linear (https://www.notion.so/Notion-and-Linear-327aec944d3c8005b851c452fdecdf06?pvs=21), Version 2 (https://www.notion.so/Version-2-327aec944d3c809585eee6714bf14d0d?pvs=21), Version 3 (https://www.notion.so/Version-3-327aec944d3c80ac9ab0e1d331817486?pvs=21), Building a Notion–Linear Sync Service (https://www.notion.so/Building-a-Notion-Linear-Sync-Service-327aec944d3c80bab8cec42bb1058a0a?pvs=21), Building a Reliable Notion–Linear Sync in Python (https://www.notion.so/Building-a-Reliable-Notion-Linear-Sync-in-Python-327aec944d3c8038a27df64bd08e0a94?pvs=21)
+versions: "Automating Linear From Notion (https://www.notion.so/Automating-Linear-From-Notion-327aec944d3c80028936cb58f46855be?pvs=21), Notion and Linear overlap just enough to create a real problem. (https://www.notion.so/Notion-and-Linear-overlap-just-enough-to-create-a-real-problem-327aec944d3c80a4976dee4a979f7d24?pvs=21), Notion and Linear (https://www.notion.so/Notion-and-Linear-327aec944d3c8005b851c452fdecdf06?pvs=21), Version 2 (https://www.notion.so/Version-2-327aec944d3c809585eee6714bf14d0d?pvs=21), Version 3 (https://www.notion.so/Version-3-327aec944d3c80ac9ab0e1d331817486?pvs=21), Building a Notion–Linear Sync Service (https://www.notion.so/Building-a-Notion-Linear-Sync-Service-327aec944d3c80bab8cec42bb1058a0a?pvs=21), Building a Reliable Notion–Linear Sync in Python (https://www.notion.so/Building-a-Reliable-Notion-Linear-Sync-in-Python-327aec944d3c8038a27df64bd08e0a94?pvs=21)"
 one liner: A reliable sync layer that makes Notion planning and Linear execution behave like a single system.
 intro set: Yes
 hero image set: Yes
@@ -23,6 +23,7 @@ body set: Yes
 closing set: Yes
 cta set: Yes
 finalized: Yes
+---
 
 Planning often starts in Notion because it is flexible and easy to shape around a team’s workflow. Execution often moves into Linear because it is structured, fast, and better at handling active delivery. That split works for a while, until the same projects, milestones, and tasks start living in both places and slowly drift out of sync.
 
@@ -32,7 +33,7 @@ It turned out to be more involved than that.
 
 Once I started dealing with conflicting edits, relationship preservation, duplicate prevention, retry logic, and sync history, the project stopped being a script and became a real synchronization engine. The interesting part was not the API wiring. It was the architecture needed to make the sync reliable enough to trust.
 
-![hero.png](Automating%20Linear%20From%20Notion/hero.png)
+![hero.png](images/hero.png)
 
 ## Body
 
@@ -58,7 +59,7 @@ On each run, the service:
 
 This is not a one-time import/export tool. It is designed to behave like an ongoing system.
 
-![notion_linear_update.mov](Automating%20Linear%20From%20Notion/notion_linear_update.mov)
+![notion_linear_update.mov](images/notion_linear_update.mov)
 
 ## **Why the Problem Is Harder Than It Looks**
 
@@ -82,7 +83,7 @@ A reliable sync cannot compare labels alone. It has to compare meaning.
 
 That shifts the real problem from “moving data between APIs” to “building a system that can preserve identity, structure, and semantics across two different tools.”
 
-![linear vs notion status.png](Automating%20Linear%20From%20Notion/linear_vs_notion_status.png)
+![linear vs notion status.png](images/linear_vs_notion_status.png)
 
 ## **The Design Decision That Made the Project Work**
 
