@@ -1,5 +1,5 @@
-# Train of Thought - Current State (1)
-
+---
+title: Train of Thought - Current State (1)
 post order: 2
 action required: 🔴 Finalize draft
 draft finalized?: No
@@ -7,11 +7,13 @@ exported?: No
 pushed to articles repo?: No
 scheduled: No
 posted: No
-link to repo: https://github.com/ZSturman/Train-of-Thought-Agent
-projects: Train of Thought Agent (https://www.notion.so/Train-of-Thought-Agent-332aec944d3c807aba3bd0950cd03a66?pvs=21), Episodic Memory Agent (https://www.notion.so/Episodic-Memory-Agent-306aec944d3c800597abd4572f1ab679?pvs=21)
+link to repo: "https://github.com/ZSturman/Train-of-Thought-Agent"
+projects: "Train of Thought Agent (https://www.notion.so/Train-of-Thought-Agent-332aec944d3c807aba3bd0950cd03a66?pvs=21), Episodic Memory Agent (https://www.notion.so/Episodic-Memory-Agent-306aec944d3c800597abd4572f1ab679?pvs=21)"
 one liner: A location-first learning agent that turns user and sensor input into inspectable memory, then grows toward a broader synthetic memory-and-attention engine.
-tags: AI, Adaptive, CLI, Learning, Location, ML, Python, Sensor, State Management, Synthetic Memory
+tags: [AI, Adaptive, CLI, Learning, Location, ML, Python, Sensor, State Management, Synthetic Memory]
 summary: Maybe recognition is grounded less in detached labels and more in place, context, and repeated reinforcement. To test that, the repo builds a small Python CLI agent that learns locations from scalar observations and sensor input, stores everything in plain runtime state, and keeps the system inspectable rather than abstract.
+updatedAt: 2026-04-03
+---
 
 The implemented arc moves from simple grayscale-to-location memory into richer location structure: first persistent location learning, then noisy matching, then multi-observation location models, then first-class labels with aliases and rename history, then nested and overlapping location context, then typed concept scaffolding, then exact-fingerprint sensor preview, and now modality-neutral ObservationBundle normalization. The longer roadmap extends that same foundation into ExperienceFrame, MemoryUnit, activation, competition, replay, resurfacing, and reconsolidation.
 
