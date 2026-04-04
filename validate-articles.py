@@ -355,6 +355,20 @@ def validate_article(article: Dict[str, Any]) -> List[str]:
     media_errors = validate_media(content_to_scan, index_path=index_path, article_root=article_root)
     errors.extend(media_errors)
 
+    # 5. Validate cover_image frontmatter value resolves to an existing file
+    if metadata is not None:
+        cover_val = (
+            metadata.get("cover_image")
+            or metadata.get("cover image")
+            or metadata.get("coverImage")
+            or ""
+        )
+        if cover_val and not cover_val.startswith(("http://", "https://")):
+            decoded_cover = unquote(cover_val)
+            resolved_cover = (index_path.parent / decoded_cover).resolve()
+            if not resolved_cover.exists():
+                errors.append(f"Missing cover image: {decoded_cover} (referenced in frontmatter)")
+
     return errors
 
 

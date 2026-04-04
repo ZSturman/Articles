@@ -70,6 +70,11 @@ HTML_ATTR_RE = re.compile(
     r'(?P<attr>\b(?:src|href)=)(?P<quote>["\'])(?P<target>[^"\']+)(?P=quote)'
 )
 
+# Pattern for plausible Notion metadata keys: letters, digits, spaces,
+# underscores, hyphens, question marks.  No commas, periods, or parens.
+_META_KEY_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9 _?\-]*$")
+_META_KEY_MAX_LEN = 30
+
 # ── Colours ──────────────────────────────────────────────────────────────────
 
 RESET = "\033[0m"
@@ -176,10 +181,14 @@ def _parse_notion_header(text: str) -> Tuple[Dict[str, str], str]:
     Parse a Notion-export-style header into key-value pairs and body.
     Returns (raw_kv_dict, body_text).
     The first # heading becomes the 'title' key.
+    The header extends until the next # heading (which starts the article body).
+    Key-value lines (key portion <= 40 chars) are captured as metadata.
+    Non-KV text is preserved as pre-body content.
     """
     lines = text.lstrip("\ufeff").replace("\r\n", "\n").split("\n")
     kv: Dict[str, str] = {}
     body_start = 0
+    pre_body_text: List[str] = []
 
     # Extract title from heading
     if lines and lines[0].startswith("# "):
@@ -190,18 +199,28 @@ def _parse_notion_header(text: str) -> Tuple[Dict[str, str], str]:
     while body_start < len(lines) and not lines[body_start].strip():
         body_start += 1
 
-    # Parse key: value lines until first blank line (within the kv block)
+    # Scan until the next # heading — everything before it is metadata.
     for i, line in enumerate(lines[body_start:], start=body_start):
         stripped = line.strip()
+
+        # Next heading = start of article body
+        if stripped.startswith("# "):
+            body_start = i
+            break
+
+        # Blank line: skip
         if not stripped:
-            body_start = i
-            break
-        if ":" in stripped and not stripped.startswith("#"):
-            key, _, value = stripped.partition(":")
-            kv[key.strip()] = value.strip()
-        else:
-            body_start = i
-            break
+            continue
+
+        # Key-value line: short key that looks like a metadata field name
+        if ":" in stripped:
+            key_part = stripped.split(":", 1)[0].strip()
+            if len(key_part) <= _META_KEY_MAX_LEN and _META_KEY_RE.match(key_part):
+                kv[key_part] = stripped.split(":", 1)[1].strip()
+                continue
+
+        # Non-KV prose: preserve for prepending to body
+        pre_body_text.append(stripped)
     else:
         body_start = len(lines)
 
@@ -210,11 +229,22 @@ def _parse_notion_header(text: str) -> Tuple[Dict[str, str], str]:
         body_start += 1
 
     body = "\n".join(lines[body_start:])
+    # Prepend any non-KV prose found in the header section
+    if pre_body_text:
+        body = "\n\n".join(pre_body_text) + "\n\n" + body
     return kv, body
 
 
 # Keys where comma-separated values should become YAML lists
 COMMA_LIST_KEYS = {"tags", "platform"}
+
+# Notion key names that should be normalised to match the publish system
+NOTION_KEY_NORMALIZE: Dict[str, str] = {
+    "cover image": "cover_image",
+    "coverimage": "cover_image",
+    "coverImage": "cover_image",
+    "cover-image": "cover_image",
+}
 
 
 def _build_frontmatter_from_notion(raw_kv: Dict[str, str]) -> Dict[str, Any]:
@@ -223,16 +253,19 @@ def _build_frontmatter_from_notion(raw_kv: Dict[str, str]) -> Dict[str, Any]:
     Preserves ALL key-value pairs from the Notion header.
     Only applies special formatting where the data clearly warrants it
     (e.g. comma-separated tags become a YAML list).
+    Normalises known key names to match the publish system.
     """
     fm: Dict[str, Any] = {}
     for key, value in raw_kv.items():
         if not value:
             continue
-        if key.lower() in COMMA_LIST_KEYS:
+        # Normalise known key variants
+        norm_key = NOTION_KEY_NORMALIZE.get(key, None) or NOTION_KEY_NORMALIZE.get(key.lower(), key)
+        if norm_key.lower() in COMMA_LIST_KEYS:
             items = [t.strip() for t in value.split(",") if t.strip()]
-            fm[key] = items if items else value
+            fm[norm_key] = items if items else value
         else:
-            fm[key] = value
+            fm[norm_key] = value
     return fm
 
 
@@ -518,6 +551,95 @@ def fix_article(article: Dict[str, Any], *, dry_run: bool) -> Tuple[List[str], L
                 clean_text = "\n".join(lines)
                 content_changed = True
                 actions.append(f"Added updatedAt: {today} (no date field found)")
+
+    # ── 4c. Recover orphaned Notion metadata from body ────────────────────
+    #     If frontmatter exists but key-value lines leaked into the body
+    #     (between closing --- and the first # heading), move them back.
+    #     Only scans a limited window (30 lines) to avoid touching real content.
+    if clean_text.startswith(FRONTMATTER_BOUNDARY):
+        normalized_c = clean_text.replace("\r\n", "\n")
+        c_lines = normalized_c.split("\n")
+        close_idx = None
+        for idx, line in enumerate(c_lines[1:], start=1):
+            if line.strip() == FRONTMATTER_BOUNDARY:
+                close_idx = idx
+                break
+        if close_idx is not None:
+            # Scan a limited window after the closing ---
+            scan_end = min(close_idx + 30, len(c_lines))
+            orphan_kv: List[Tuple[int, str, str]] = []  # (line_idx, key, value)
+            for bi in range(close_idx + 1, scan_end):
+                stripped = c_lines[bi].strip()
+                if stripped.startswith("# "):
+                    break
+                if not stripped:
+                    continue
+                # Is it a key: value pair with a plausible metadata key?
+                if ":" in stripped:
+                    key_part = stripped.split(":", 1)[0].strip()
+                    if len(key_part) <= _META_KEY_MAX_LEN and _META_KEY_RE.match(key_part):
+                        v = stripped.split(":", 1)[1].strip()
+                        orphan_kv.append((bi, key_part, v))
+
+            if orphan_kv:
+                # Insert orphaned KV pairs into frontmatter (before closing ---)
+                insert_lines = []
+                for _, k, v in orphan_kv:
+                    norm_k = NOTION_KEY_NORMALIZE.get(k, None) or NOTION_KEY_NORMALIZE.get(k.lower(), k)
+                    if ":" in v or v.startswith(("{", "[", '"', "'")):
+                        insert_lines.append(f'{norm_k}: "{v}"')
+                    else:
+                        insert_lines.append(f"{norm_k}: {v}")
+                    actions.append(f"Recover orphaned metadata: {k} -> frontmatter")
+
+                # Remove only the orphaned KV lines from body (reverse order)
+                for li, _, _ in sorted(orphan_kv, key=lambda x: x[0], reverse=True):
+                    c_lines.pop(li)
+
+                # Insert new KV lines just before the closing ---
+                for il in insert_lines:
+                    c_lines.insert(close_idx, il)
+
+                clean_text = "\n".join(c_lines)
+                content_changed = True
+
+    # ── 4d. Normalise cover image key and fix path in frontmatter ────────
+    if clean_text.startswith(FRONTMATTER_BOUNDARY):
+        normalized_d = clean_text.replace("\r\n", "\n")
+        d_lines = normalized_d.split("\n")
+        close_idx_d = None
+        for idx, line in enumerate(d_lines[1:], start=1):
+            if line.strip() == FRONTMATTER_BOUNDARY:
+                close_idx_d = idx
+                break
+        if close_idx_d is not None:
+            for j in range(1, close_idx_d):
+                line_lower = d_lines[j].strip().lower()
+                for variant in ["cover_image:", "cover image:", "coverimage:", "cover-image:"]:
+                    if line_lower.startswith(variant):
+                        colon_pos = d_lines[j].index(":")
+                        old_key = d_lines[j][:colon_pos].strip()
+                        raw_val = d_lines[j][colon_pos + 1:].strip().strip('"').strip("'")
+                        new_val = raw_val
+                        # Fix the path if it's relative and broken
+                        if raw_val and not raw_val.startswith(("http://", "https://")):
+                            decoded = unquote(raw_val)
+                            resolved = (index_path.parent / decoded).resolve()
+                            if not resolved.exists():
+                                filename = Path(decoded).name
+                                found = _find_file_by_name(filename, article_root)
+                                if found:
+                                    rel = os.path.relpath(found, index_path.parent).replace(os.sep, "/")
+                                    actions.append(f"Fix cover image path: {decoded} -> {rel}")
+                                    new_val = rel
+                                else:
+                                    errors.append(f"Cover image not found: {decoded}")
+                        if old_key != "cover_image":
+                            actions.append(f"Normalise cover image key: {old_key} -> cover_image")
+                        d_lines[j] = f"cover_image: {new_val}"
+                        clean_text = "\n".join(d_lines)
+                        content_changed = True
+                        break
 
     # ── 5. Fix broken media paths ────────────────────────────────────────
     rewritten, media_fixes, media_missing = _fix_media_paths_in_markdown(

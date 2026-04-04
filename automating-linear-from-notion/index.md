@@ -6,7 +6,7 @@ scheduled: No
 platform: [DEV, Hashnode, Hashnoon, Medium]
 link to repo: "https://github.com/ZSturman/Linear-Notion-Sync"
 projects: "Notion as a Source of Truth (https://www.notion.so/Notion-as-a-Source-of-Truth-304aec944d3c8029a1b1ea0f92487137?pvs=21)"
-cover image: Automating%20Linear%20From%20Notion/Cover.png
+cover_image: images/Cover.png
 summary: A bidirectional sync engine that keeps Notion and Linear aligned by normalizing their data into shared models, reconciling meaningful changes, and preserving relationships and identity across systems.
 tags: [API Integration, Automation, Linear, Notion, Python, State Management, Systems Design]
 series: Notion as a Source of Truth

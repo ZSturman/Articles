@@ -13,14 +13,14 @@ one liner: A location-first learning agent that turns user and sensor input into
 tags: [AI, Adaptive, CLI, Learning, Location, ML, Python, Sensor, State Management, Synthetic Memory]
 summary: Maybe recognition is grounded less in detached labels and more in place, context, and repeated reinforcement. To test that, the repo builds a small Python CLI agent that learns locations from scalar observations and sensor input, stores everything in plain runtime state, and keeps the system inspectable rather than abstract.
 updatedAt: 2026-04-03
+Last edited time: "April 3, 2026 6:35 PM"
+cover_image: images/cover_image.png
+series: Engineering AI for Recognition and Memory
 ---
 
 The implemented arc moves from simple grayscale-to-location memory into richer location structure: first persistent location learning, then noisy matching, then multi-observation location models, then first-class labels with aliases and rename history, then nested and overlapping location context, then typed concept scaffolding, then exact-fingerprint sensor preview, and now modality-neutral ObservationBundle normalization. The longer roadmap extends that same foundation into ExperienceFrame, MemoryUnit, activation, competition, replay, resurfacing, and reconsolidation.
 
 What makes the project distinct is the design stance: the memory is grounded only in explicit user input or direct sensor input with provenance, the internal state stays readable, and newer layers are added only after the current layer is concrete and testable.
-series: Engineering AI for Recognition and Memory
-cover image: Train%20of%20Thought%20-%20Current%20State%20(1)/cover_image.png
-Last edited time: April 3, 2026 6:35 PM
 
 # Building a Location-First Learning Agent to Explore Context, Memory, and Consciousness
 
