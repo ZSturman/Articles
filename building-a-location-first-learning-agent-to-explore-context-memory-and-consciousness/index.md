@@ -1,28 +1,22 @@
 ---
-title: Train of Thought - Current State (1)
+title: Building a Location-First Learning Agent to Explore Context, Memory, and Consciousness
 post order: 2
-action required: 🔴 Finalize draft
-draft finalized?: No
-exported?: No
-pushed to articles repo?: No
+action required: 🔴 Set status
+draft finalized?: Yes
+exported?: Yes
+pushed to articles repo?: Yes
 scheduled: No
 posted: No
 link to repo: "https://github.com/ZSturman/Train-of-Thought-Agent"
 projects: "Train of Thought Agent (https://www.notion.so/Train-of-Thought-Agent-332aec944d3c807aba3bd0950cd03a66?pvs=21), Episodic Memory Agent (https://www.notion.so/Episodic-Memory-Agent-306aec944d3c800597abd4572f1ab679?pvs=21)"
 one liner: A location-first learning agent that turns user and sensor input into inspectable memory, then grows toward a broader synthetic memory-and-attention engine.
 tags: [AI, Adaptive, CLI, Learning, Location, ML, Python, Sensor, State Management, Synthetic Memory]
-summary: Maybe recognition is grounded less in detached labels and more in place, context, and repeated reinforcement. To test that, the repo builds a small Python CLI agent that learns locations from scalar observations and sensor input, stores everything in plain runtime state, and keeps the system inspectable rather than abstract.
-updatedAt: 2026-04-03
-Last edited time: "April 3, 2026 6:35 PM"
-cover_image: images/cover_image.png
+summary: "Maybe recognition is grounded less in detached labels and more in place, context, and repeated reinforcement. To test that, the repo builds a small Python CLI agent that learns locations from scalar observations and sensor input, stores everything in plain runtime state, and keeps the system inspectable rather than abstract. The implemented arc moves from simple grayscale-to-location memory into richer location structure: first persistent location learning, then noisy matching, then multi-observation location models, then first-class labels with aliases and rename history, then nested and overlapping location context, then typed concept scaffolding, then exact-fingerprint sensor preview, and now modality-neutral ObservationBundle normalization. The longer roadmap extends that same foundation into ExperienceFrame, MemoryUnit, activation, competition, replay, resurfacing, and reconsolidation."
 series: Engineering AI for Recognition and Memory
+cover_image: images/cover_image.png
+Last edited time: "April 4, 2026 3:57 PM"
+updatedAt: 2026-04-04
 ---
-
-The implemented arc moves from simple grayscale-to-location memory into richer location structure: first persistent location learning, then noisy matching, then multi-observation location models, then first-class labels with aliases and rename history, then nested and overlapping location context, then typed concept scaffolding, then exact-fingerprint sensor preview, and now modality-neutral ObservationBundle normalization. The longer roadmap extends that same foundation into ExperienceFrame, MemoryUnit, activation, competition, replay, resurfacing, and reconsolidation.
-
-What makes the project distinct is the design stance: the memory is grounded only in explicit user input or direct sensor input with provenance, the internal state stays readable, and newer layers are added only after the current layer is concrete and testable.
-
-# Building a Location-First Learning Agent to Explore Context, Memory, and Consciousness
 
 I wanted a simpler environment for testing one idea that kept bothering me: maybe recognition is less about detached labels than it is about where something is, what surrounds it, and how that context gets reinforced. That is what pushed me to build this repo. I wanted a smaller problem that still felt close to the thing I cared about. The question that kept pulling me back was whether location and context are a big part of knowing something at all, and whether they help make object recognition faster and more grounded.
 
@@ -41,8 +35,11 @@ So the first version of this project was almost stubbornly small. It learned gra
 The repo has moved through a few clear phases since then:
 
 - Phase 1 bootstrapped exact-match grayscale memory with persistence and append-only logging.
+
 - Phase 2 added noisy scalar matching and confidence thresholds.
+
 - Phase 3 merged repeated observations into location models instead of treating every value as a separate record.
+
 - Phase 4, the current phase, introduces first-class labels, aliases, rename history, sensor bindings, and provenance-aware evidence records.
 
 That progression matters to me because it shows the shape of the project. I am not trying to jump straight from nothing to a full theory of mind. I am trying to build up a memory system that stays small enough to reason about while it gets more structured.
@@ -97,23 +94,32 @@ That simplicity fits the purpose of the project. I am not trying to hide the str
 
 This is where I think a lot of projects get muddy, so I want to keep it clean.
 
-Implemented now:
-
 - persistent scalar learning with confidence and span-aware matching
+
 - first-class labels with aliases and rename history
+
 - exact-file sensor binding for a temporary image-preview path
+
 - provenance-aware evidence records restricted to user or sensor sources
+
 - repo-local fixture images, scenario manifests, and validation checks
 
 Documented for later, but not implemented yet:
 
 - `ObservationBundle`
+
 - `ExperienceFrame`
+
 - `MemoryUnit`
+
 - activation competition
+
 - replay
+
 - resurfacing
+
 - reconsolidation
+
 - richer body-relative and multimodal context
 
 I have already written those future concepts into the roadmap because I want a stable direction for the project, but I do not want to collapse the distinction between "planned" and "running." Right now this is still a location-first learning system with a broader cognitive direction, not a finished memory engine.
@@ -138,13 +144,15 @@ I will post more about it after I have a better sense of what it can and cannot 
 
 ![01v2_cli_to_core_execution_map.png](images/01v2_cli_to_core_execution_map.png)
 
-If you want to follow along you can find the repo here: 
+If you want to follow along you can find the repo here:
 
 - Repo:  [https://github.com/ZSturman/Train-of-Thought-Agent](https://github.com/ZSturman/Train-of-Thought-Agent)
 
-or reach out to me here:
-
 - GitHub: [github.com/zsturman](https://github.com/zsturman)
+
 - LinkedIn: [linkedin.com/in/zacharysturman](https://linkedin.com/in/zacharysturman)
+
 - Portfolio: [zachary-sturman.com](https://zachary-sturman.com/)
+
 - Email: [Zasturman@gmail.com](mailto:Zasturman@gmail.com)
+
