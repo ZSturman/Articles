@@ -49,7 +49,7 @@ MEDIA_EXTS = {
 
 SCHEME_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
 MARKDOWN_LINK_RE = re.compile(
-    r"(?P<prefix>!?\[[^\]]*\]\()(?P<target>[^)\n]+)(?P<suffix>\))"
+    r"(?P<prefix>!?\[[^\]]*\]\()(?P<target>(?:[^()\n]|\([^)]*\))+)(?P<suffix>\))"
 )
 HTML_ATTR_RE = re.compile(
     r'(?P<attr>\b(?:src|href)=)(?P<quote>["\'])(?P<target>[^"\']+)(?P=quote)'

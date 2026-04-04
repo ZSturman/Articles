@@ -30,7 +30,7 @@ That led me to build a small location-first learning agent. Right now it is a Py
 
 I also made a deliberate structural choice early on. I started out working with Thousand Brains Project Monty, but I split this work into a separate repo because I wanted a simpler environment where I could move directly on the parts I was most interested in. I did not want to spend my time threading a new experiment through a larger existing system before I understood the experiment itself.
 
-![1. Phase roadmap.png](Train%20of%20Thought%20-%20Current%20State%20(1)/1._Phase_roadmap.png)
+![1. Phase roadmap.png](images/1._Phase_roadmap.png)
 
 ## Why I started with location
 
@@ -47,7 +47,7 @@ The repo has moved through a few clear phases since then:
 
 That progression matters to me because it shows the shape of the project. I am not trying to jump straight from nothing to a full theory of mind. I am trying to build up a memory system that stays small enough to reason about while it gets more structured.
 
-![6 schema plan.png](Train%20of%20Thought%20-%20Current%20State%20(1)/6_schema_plan.png)
+![6 schema plan.png](images/6_schema_plan.png)
 
 ## What the current project actually does
 
@@ -61,7 +61,7 @@ Second, scalar matching is not just nearest-prototype matching anymore. If the s
 
 Third, the current phase adds a sensor preview through `sense /path/to/file`. This lets the agent learn or recognize a file-backed input and bind it to a location. The important limitation is that it does this through exact file fingerprinting. It hashes the file contents, stores the fingerprint, and re-recognizes that exact input later. That is useful as a stepping stone, but it is not the final perception model I want. I have been careful in the repo docs to describe it as a temporary preview, because I do not want a convenient shortcut to quietly become the architecture.
 
-![3. Runtime persistence.png](Train%20of%20Thought%20-%20Current%20State%20(1)/3._Runtime_persistence.png)
+![3. Runtime persistence.png](images/3._Runtime_persistence.png)
 
 ## The design decision that mattered most: identity is not the same thing as a name
 
@@ -73,7 +73,7 @@ Phase 4 changes that by introducing `LabelNode` and storing label ownership thro
 
 This also made the inspectability better. The `inspect` command can now surface canonical label, aliases, label id, prototype, spread, observation count, and rename count in one place. The runtime schema also carries `sensor_bindings`, `graph_edges`, `concept_nodes`, and `evidence_records`, even though some of that is still scaffolding for later phases. I like that the state can be read directly. I can see what the agent knows, why it knows it, and which parts are still placeholders for future work.
 
-![4. end to end sequence.png](Train%20of%20Thought%20-%20Current%20State%20(1)/4._end_to_end_sequence.png)
+![4. end to end sequence.png](images/4._end_to_end_sequence.png)
 
 ## The second big decision: keep the sensor preview useful, but refuse to confuse it with perception
 
@@ -118,7 +118,7 @@ Documented for later, but not implemented yet:
 
 I have already written those future concepts into the roadmap because I want a stable direction for the project, but I do not want to collapse the distinction between "planned" and "running." Right now this is still a location-first learning system with a broader cognitive direction, not a finished memory engine.
 
-![2. Observational Bundle.png](Train%20of%20Thought%20-%20Current%20State%20(1)/2._Observational_Bundle.png)
+![2. Observational Bundle.png](images/2._Observational_Bundle.png)
 
 ## What I learned from building it this way
 
@@ -136,7 +136,7 @@ That is probably the clearest way I can describe the project right now. I starte
 
 I will post more about it after I have a better sense of what it can and cannot do. If you have thoughts about location, context, or memory design, I would be interested to hear them. The project is still early enough that those conversations can still influence how I shape the next layers.
 
-![01v2_cli_to_core_execution_map.png](Train%20of%20Thought%20-%20Current%20State%20(1)/01v2_cli_to_core_execution_map.png)
+![01v2_cli_to_core_execution_map.png](images/01v2_cli_to_core_execution_map.png)
 
 If you want to follow along you can find the repo here: 
 
