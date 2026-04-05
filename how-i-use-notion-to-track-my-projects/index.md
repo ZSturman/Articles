@@ -10,7 +10,7 @@ pushed to articles repo?: No
 scheduled: No
 projects: "My Notion Pipeline (https://www.notion.so/My-Notion-Pipeline-304aec944d3c8029a1b1ea0f92487137?pvs=21)"
 tags: [AI, API Integration, ML, Notion, Productivity]
-summary: This Notion system works less like a notes app and more like a guided project intake workflow. Every new project starts from a template, moves through a Required Action system that surfaces the highest-priority next step, and builds toward a structure that is ready for execution, portfolio use, and later automation.
+summary: This Notion setup is a guided project intake workflow rather than a simple notes system: each project starts from a template, highlights the highest-priority next step, and builds toward execution, portfolio readiness, and future automation. By checking key setup steps automatically and separating projects, tasks, assets, resources, and milestones into linked systems, it reduces friction and makes the workflow easier to manage as it scales.
 series: My Notion Pipeline
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/cover_image.png
