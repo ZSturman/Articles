@@ -1,5 +1,5 @@
-# Building ChewSense - Using Motion Data For An On-Device AI Health Agent
-
+---
+title: Building ChewSense - Using Motion Data For An On-Device AI Health Agent
 action required: 🟠 Export
 post on: Jun 30
 write by: Apr 9
@@ -9,14 +9,16 @@ exported?: No
 pushed to articles repo?: No
 scheduled: No
 posted: No
-projects: ChewSense (https://www.notion.so/ChewSense-306aec944d3c808d9adaf0ccca484d3b?pvs=21)
+projects: "ChewSense (https://www.notion.so/ChewSense-306aec944d3c808d9adaf0ccca484d3b?pvs=21)"
 one liner: A first-person build story about turning AirPods motion data, synchronized video, and disciplined tooling into a believable on-device chewing-detection ML pipeline.
-tags: AirPods, Applied ML, ChewSense, Health Tech, Machine Learning, On-Device, Prototyping, Python, Swift, Time-series, Wearables, iOS
+tags: [AirPods, Applied ML, ChewSense, Health Tech, Machine Learning, On-Device, Prototyping, Python, Swift, Time-series, Wearables, iOS]
 summary: This article traces how ChewSense evolved from early experiments with raw AirPods motion signals into a structured pipeline for session collection, video-assisted labeling, feature extraction, model training, and on-device inference. The core lesson is that the hardest part of applied ML was not just training a model, but building the surrounding system needed to collect trustworthy data, preserve feature parity, and make runtime behavior believable.
 series: ChewSense
-platform: DEV, Hashnode, Hashnoon, Medium
-cover image: Building%20ChewSense%20-%20Using%20Motion%20Data%20For%20An%20On-D/hero.png
-Last edited time: April 7, 2026 3:47 AM
+platform: [DEV, Hashnode, Hashnoon, Medium]
+cover_image: images/hero.png
+Last edited time: "April 7, 2026 3:47 AM"
+updatedAt: 2026-04-07
+---
 
 I did not build ChewSense in a straight line, and I definitely did not build it efficiently.
 
@@ -26,7 +28,7 @@ At first I thought this was going to be a model problem. Get the right signals, 
 
 That shift in understanding is probably the real story of this project.
 
-![34.png](Building%20ChewSense%20-%20Using%20Motion%20Data%20For%20An%20On-D/34.png)
+![34.png](images/34.png)
 
 ## I started by trying to prove the sensors were even worth using
 
@@ -64,7 +66,7 @@ That also changed what “working” meant. Before that, working meant I could s
 
 I think this was the point where the project stopped being an interesting technical experiment and started becoming an ML workflow, even if I did not fully appreciate that yet.
 
-![6.png](Building%20ChewSense%20-%20Using%20Motion%20Data%20For%20An%20On-D/6.png)
+![6.png](images/6.png)
 
 ## Labeling turned out to be one of the real projects inside the project
 
@@ -80,7 +82,7 @@ I learned that building everything from scratch is usually less impressive after
 
 Every time the labeling workflow changed, the project changed with it.
 
-![5.png](Building%20ChewSense%20-%20Using%20Motion%20Data%20For%20An%20On-D/5.png)
+![5.png](images/5.png)
 
 ## I spent a while exploring too many branches, but that taught me what to narrow
 
@@ -94,7 +96,7 @@ I also learned something more encouraging on the modeling side: motion-data mode
 
 That was a healthier way to think about it.
 
-![234.png](Building%20ChewSense%20-%20Using%20Motion%20Data%20For%20An%20On-D/234.png)
+![234.png](images/234.png)
 
 ## The collector became better when I stopped pretending it needed to be the final product
 
@@ -106,7 +108,7 @@ I think I had been blending two jobs together for too long: building the thing t
 
 This is where I also learned to appreciate more native approaches. File-system-based organization, direct CSV storage, simpler review paths, and more explicit session folders ended up being more useful than trying to make the whole thing feel abstracted and product-like too early. In this case, native systems were not a compromise. They were part of what made the pipeline more believable.
 
-![7.png](Building%20ChewSense%20-%20Using%20Motion%20Data%20For%20An%20On-D/7.png)
+![7.png](images/7.png)
 
 ## The ML pipeline finally gave the project a backbone
 
@@ -120,7 +122,7 @@ I also learned a lot here about the science of jaw and eating motion, or at leas
 
 That was another useful lesson. A lot of the work in practical ML is not choosing a complicated model. It is understanding the phenomenon well enough to represent it cleanly.
 
-![8.png](Building%20ChewSense%20-%20Using%20Motion%20Data%20For%20An%20On-D/8.png)
+![8.png](images/8.png)
 
 ## On-device inference was where the project got honest again
 
@@ -164,7 +166,7 @@ And I learned that building something like this is less about one app getting st
 
 That is the version of the project I trust now.
 
-![12.png](Building%20ChewSense%20-%20Using%20Motion%20Data%20For%20An%20On-D/12.png)
+![12.png](images/12.png)
 
 ## Where I want to take it next
 
@@ -177,3 +179,4 @@ So that is where ChewSense stands for me right now. It started as a curiosity ab
 I am still working on it. More is coming. But this is the first version of the project that feels like it has earned its next step.
 
 I am still refining ChewSense, so the repos are the clearest way to see what is real, what is evolving, and what comes next. If you have built something similar, want to compare notes, or just want to follow the project, reach out on [LinkedIn](https://linkedin.com/in/zacharysturman), explore the work on [GitHub](http://github.com/zsturman), or start with these repos: [ChewSense-Collection](https://github.com/ZSturman/ChewSense-Collection), [ChewSense—Data-Collection-and-Labeling](https://github.com/ZSturman/ChewSense---Data-Collection-and-Labeling), and [Chew-Sense](https://github.com/ZSturman/Chew-Sense). More context on my broader work is at [zachary-sturman.com](https://zachary-sturman.com/).
+
