@@ -1,5 +1,5 @@
-# Building a Desktop App Around Google Sheets
-
+---
+title: Building a Desktop App Around Google Sheets
 action required: 🟡 Push to articles repo
 post on: Jun 25
 write by: Apr 7
@@ -10,12 +10,14 @@ pushed to articles repo?: No
 scheduled: No
 posted: No
 one liner: A manufacturing scheduling project that evolved from a desktop app built around spreadsheet workflows into a web-based system focused on reducing adoption friction.
-tags: Desktop App, Google Sheets, Manufacturing, SaaS, Spreadsheets, Systems Design, Tauri, Web App
+tags: [Desktop App, Google Sheets, Manufacturing, SaaS, Spreadsheets, Systems Design, Tauri, Web App]
 summary: This project began after seeing a manufacturer manage production schedules through emailed Excel files, which exposed how much critical operational work was being held together by fragile spreadsheet workflows. It started as a desktop app built around those existing habits, but the bigger lesson was that the real challenge was not just replacing spreadsheets, it was reducing the friction of adoption. That led to a web-based version focused on easier onboarding, configuration, and reusable workflow views, with the project ultimately becoming a lesson in testing earlier and designing for usability before technical ambition.
 series: Using Google Sheets as an Application Database
-platform: DEV, Hashnode, Hashnoon, Medium
-cover image: Building%20a%20Desktop%20App%20Around%20Google%20Sheets/Spreadsheet_chaos_scene.png
-Last edited time: April 7, 2026 2:59 AM
+platform: [DEV, Hashnode, Hashnoon, Medium]
+cover_image: images/Spreadsheet_chaos_scene.png
+Last edited time: "April 7, 2026 2:59 AM"
+updatedAt: 2026-04-07
+---
 
 When I moved to Washington after getting back from Australia, a client told me they were emailing Excel files back and forth to manage production schedules. Not a polished internal system, but just spreadsheets moving around between people because that was what they had.
 
@@ -25,7 +27,7 @@ I didn’t begin with a big product thesis. I just thought there had to be a bet
 
 So I started building.
 
-![V1 desktop concept mockup.png](Building%20a%20Desktop%20App%20Around%20Google%20Sheets/V1_desktop_concept_mockup.png)
+![V1 desktop concept mockup.png](images/V1_desktop_concept_mockup.png)
 
 ### V1 Started As A Desktop App Because That Was How I Was Thinking About The Problem
 
@@ -39,7 +41,7 @@ That combination pushed me toward a desktop app that could work closely with spr
 
 I still think that instinct was understandable. What changed later was not that the idea was foolish. What changed was my understanding of where the real friction lived.
 
-![Prototype-to-product evolution graphic.png](Building%20a%20Desktop%20App%20Around%20Google%20Sheets/Prototype-to-product_evolution_graphic.png)
+![Prototype-to-product evolution graphic.png](images/Prototype-to-product_evolution_graphic.png)
 
 ### The Desktop App Taught Me More Than I Expected
 
@@ -57,7 +59,7 @@ That was valuable. I do not see the desktop version as wasted effort.
 
 It taught me how much invisible complexity lives in the layer between “this app works on my machine” and “this is easy enough for someone else to adopt without help.” It also made me much more aware of how quickly technical enthusiasm can shape product direction before the product itself has earned that level of commitment.
 
-![Adoption friction comparison.png](Building%20a%20Desktop%20App%20Around%20Google%20Sheets/Adoption_friction_comparison.png)
+![Adoption friction comparison.png](images/Adoption_friction_comparison.png)
 
 ### Google Sheets Was A Practical Choice, Not A Romantic One
 
@@ -71,7 +73,7 @@ That decision also shaped the product in useful ways. It kept the system close t
 
 At the same time, it created its own constraints. When your product grows around spreadsheets, you eventually have to think hard about validation, structure drift, setup quality, and how much flexibility you actually want to expose. That became more obvious in the later web version, where configuration and onboarding started to matter much more.
 
-![Google Sheets as infrastructure visual.png](Building%20a%20Desktop%20App%20Around%20Google%20Sheets/Google_Sheets_as_infrastructure_visual.png)
+![Google Sheets as infrastructure visual.png](images/Google_Sheets_as_infrastructure_visual.png)
 
 ### The Bigger Problem Turned Out To Be Distribution
 
@@ -89,7 +91,7 @@ The install step was not a neutral detail. It was part of the product. If the ba
 
 That realization pushed me toward a web version.
 
-![Desktop complexity diagram.png](Building%20a%20Desktop%20App%20Around%20Google%20Sheets/Desktop_complexity_diagram.png)
+![Desktop complexity diagram.png](images/Desktop_complexity_diagram.png)
 
 ### V2 Changed More Than The Delivery Model
 
@@ -106,13 +108,16 @@ That feels more honest to the actual problem.
 If the original pain point was people passing spreadsheet files around to keep operations moving, then the solution cannot only be “replace the spreadsheet.” It also has to answer questions like:
 
 - How does someone connect their data safely?
+
 - How much setup is required?
+
 - How do they understand what is missing or mismatched?
+
 - How do they get from raw spreadsheet structure to something usable without a lot of manual interpretation?
 
 The web version moves closer to those questions.
 
-![V2 modular system architecture.png](Building%20a%20Desktop%20App%20Around%20Google%20Sheets/V2_modular_system_architecture.png)
+![V2 modular system architecture.png](images/V2_modular_system_architecture.png)
 
 ### What I Would Handle Differently Now
 
@@ -147,3 +152,4 @@ The better question turned out to be, “What would make this easier for someone
 That is the version of the problem I care more about now.
 
 If you have built internal tools around spreadsheet-heavy workflows, or you have had to rethink a project after building too much too early, I would be glad to compare notes. You can find me at [zachary-sturman.com](https://zachary-sturman.com/), [github.com/zsturman](https://github.com/zsturman), [LinkedIn](https://linkedin.com/in/zacharysturman), or by email at [Zasturman@gmail.com](mailto:Zasturman@gmail.com).
+
