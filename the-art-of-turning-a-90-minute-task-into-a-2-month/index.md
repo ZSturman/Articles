@@ -1,5 +1,5 @@
-# The Art of Turning a 90-Minute Task Into a 2-Month Automation Project
-
+---
+title: The Art of Turning a 90-Minute Task Into a 2-Month Automation Project
 action required: 🟠 Export
 post on: Jul 11
 write by: Apr 16
@@ -9,15 +9,17 @@ exported?: No
 pushed to articles repo?: No
 scheduled: No
 posted: No
-projects: Folio (https://www.notion.so/Folio-324aec944d3c8068a8a7ed6d1d4d1790?pvs=21), My Notion Pipeline (https://www.notion.so/My-Notion-Pipeline-304aec944d3c8029a1b1ea0f92487137?pvs=21)
+projects: "Folio (https://www.notion.so/Folio-324aec944d3c8068a8a7ed6d1d4d1790?pvs=21), My Notion Pipeline (https://www.notion.so/My-Notion-Pipeline-304aec944d3c8029a1b1ea0f92487137?pvs=21)"
 one liner: A reflection on building four generations of project-and-portfolio management tools, and why a simpler integrated workflow ultimately beat a fully custom app.
-tags: Automation, Note Taking, Notion, Obsidian, Portfolio, Product Design, React, Swift, macOS
+tags: [Automation, Note Taking, Notion, Obsidian, Portfolio, Product Design, React, Swift, macOS]
 summary: The article traces the evolution of four systems - Obsidian + Project Management App, OPE, RPOVault, and Folio - built to keep project metadata, files, and a public portfolio in sync without constant duplication. Each version clarified the value of structured project records, but also exposed the growing maintenance cost of owning every layer, especially around files, media, and editing workflows. The final takeaway is that integrating existing tools like Notion, n8n, GitHub Actions, and Firebase solves the real problem more effectively than continuing to maintain a complex custom application.
 series: My Notion Pipeline
-platform: DEV, Hashnode, Hashnoon, Medium
-cover image: The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/Concept_art_with_Logo.jpeg
-Last edited time: April 8, 2026 5:20 PM
+platform: [DEV, Hashnode, Hashnoon, Medium]
+cover_image: images/Concept_art_with_Logo.jpeg
+Last edited time: "April 8, 2026 5:20 PM"
 dash for layout: -
+updatedAt: 2026-04-08
+---
 
 For the last few years, I kept returning to the same problem in slightly different forms.
 
@@ -31,15 +33,18 @@ That idea kept making sense to me, which is probably why I kept rebuilding it.
 
 What changed over time was the implementation. The stacks changed, the interfaces changed, and my understanding of the problem changed with them. Looking back, there are four versions that really define the arc: **Obsidian + Project Management App**, **OPE**, **RPOVault**, and **Folio**.
 
-![hero.png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/hero.png)
+![hero.png](images/hero.png)
 
 ## **A rough timeline**
 
 This was not one clean straight line. A few versions overlapped, and some of them fed directly into the next without ever really being finished in the usual sense. But the broad arc looked like this:
 
 - **Obsidian + Project Management App**: early attempt to connect projects, folders, and notes
+
 - **OPE**: the stage where the schema and workflow became the real focus
+
 - **RPOVault**: a React-based GUI layer tying the system together more directly
+
 - **Folio**: the most complete version, a macOS app that actually shipped
 
 That progression matters because each version taught me something different, and the later ones only make sense in light of the earlier ones.
@@ -48,7 +53,7 @@ That progression matters because each version taught me something different, and
 
 ## **Obsidian + Project Management App**
 
-![Project Metadata.png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/Project_Metadata.png)
+![Project Metadata.png](images/Project_Metadata.png)
 
 This was one of the earliest versions where the problem became real software instead of just an idea.
 
@@ -66,7 +71,7 @@ This version did a good job of revealing that tension, even if it was not the fi
 
 ## **OPE**
 
-![Ope Hero.png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/Ope_Hero.png)
+![Ope Hero.png](images/Ope_Hero.png)
 
 OPE stands for **Organize, Prioritize and Execute**, and this was probably the point where the system became most conceptually clear to me.
 
@@ -96,7 +101,7 @@ That shift mattered because it changed the day-to-day experience of the system. 
 
 In practice, it did help, but it also revealed that better editing does not remove architectural complexity. It just changes where you feel it.
 
-![Content json.png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/Content_json.png)
+![Content json.png](images/Content_json.png)
 
 The schema still had to be coherent. File paths still had to work. Media still had to land in the right place. The system still had to preserve structure across saves and changes. So while the GUI made the system friendlier, it did not fundamentally make it lighter.
 
@@ -108,7 +113,7 @@ RPOVault sits in that middle ground for me. It was a meaningful step because it 
 
 ## **Folio**
 
-![Folio Launch Screen.png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/Folio_Launch_Screen.png)
+![Folio Launch Screen.png](images/Folio_Launch_Screen.png)
 
 Folio was the version where the project became real enough to ship.
 
@@ -122,7 +127,7 @@ The app worked. I got the metadata flow working end to end. I shipped it. It is 
 
 That was probably the clearest turning point.
 
-![Folio Media .png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/Folio_Media_.png)
+![Folio Media .png](images/Folio_Media_.png)
 
 A tool that is supposed to help with project ingest can quietly become a roadblock preventing projects from being ingested. Once I could feel that happening, it was hard to ignore. If the cost of keeping the system correct starts outweighing the value of the system itself, then the design may still be interesting, but the workflow is already in trouble.
 
@@ -134,11 +139,11 @@ It also taught me when to stop.
 
 ## **What survived all four versions**
 
-![Foli problemt space.png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/Foli_problemt_space.png)
+![Foli problemt space.png](images/Foli_problemt_space.png)
 
 Across these versions, the project record was the part that consistently remained, because the core need was not a specific shell, stack, or interface so much as a clearer structure for the project itself.
 
- A serious project usually needs a title, yes, but also status, descriptions, media, references, relationships, context, and enough consistency that it can be reused elsewhere without re-entering everything manually.
+A serious project usually needs a title, yes, but also status, descriptions, media, references, relationships, context, and enough consistency that it can be reused elsewhere without re-entering everything manually.
 
 That part still feels true to me.
 
@@ -156,7 +161,7 @@ I do not think building custom tools was a mistake. It was useful, interesting, 
 
 ## **Where I am now**
 
-![tech complexity.png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/tech_complexity.png)
+![tech complexity.png](images/tech_complexity.png)
 
 The ending here is not that I gave up on the idea. It is that I changed how I build it.
 
@@ -165,11 +170,17 @@ These days, Notion is the source of truth for project metadata. Linear handles t
 The workflow now looks more like this:
 
 ```markdown
+
 Notion project metadata
+
 → n8n automation
+
 → transform / package data
+
 → GitHub Actions for build and test
+
 → Firebase hosting
+
 ```
 
 This setup does not give me the same feeling of total control that the custom app did, but it does solve the actual problem more effectively. I can keep project metadata in one place, automate the parts that benefit from automation, and avoid maintaining a custom metadata generator that introduces more overhead than it removes.
@@ -184,7 +195,7 @@ For a while I was trying to remove all friction from the workflow, but some fric
 
 ## **What I learned**
 
-![Productivity overload.png](The%20Art%20of%20Turning%20a%2090-Minute%20Task%20Into%20a%202-Month/Productivity_overload.png)
+![Productivity overload.png](images/Productivity_overload.png)
 
 I learned a lot from this, and most of it came from building the whole thing far enough to see where it broke down.
 
@@ -221,3 +232,4 @@ If you want to see how I use Notion to track my projects, read:
 If you want a more in-depth look at the original app and code, or want to use any of it yourself, the repository is here:
 
 - [https://github.com/ZSturman/Folio-Studio](https://github.com/ZSturman/Folio-Studio)
+
