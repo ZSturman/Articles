@@ -1,5 +1,5 @@
-# Consolidating an Offline-First Episodic Memory System
-
+---
+title: Consolidating an Offline-First Episodic Memory System
 action required: 🟠 Export
 post on: Jul 21
 write by: Apr 20
@@ -9,15 +9,17 @@ exported?: No
 pushed to articles repo?: No
 scheduled: No
 posted: No
-projects: Episodic Memory Agent (https://www.notion.so/Episodic-Memory-Agent-306aec944d3c800597abd4572f1ab679?pvs=21)
+projects: "Episodic Memory Agent (https://www.notion.so/Episodic-Memory-Agent-306aec944d3c800597abd4572f1ab679?pvs=21)"
 one liner: This project is becoming a single offline-first episodic memory system that brings runtime, artifacts, and inspection into one coherent architecture, with location playing a central role in how memory is formed and understood.
-tags: Dashboard, Episodic Memory, Monty, Synthetic Memory, Thousand Brains Projects
+tags: [Dashboard, Episodic Memory, Monty, Synthetic Memory, Thousand Brains Projects]
 summary: This piece traces the consolidation of several related experiments into one canonical episodic memory project, built around a single Python package, a shared artifact contract, and a dashboard and notebook workflow that inspect the same persisted runs. It argues that memory systems become more useful when they are transparent, offline-first, and structured around evidence, decision traces, and revisitable artifacts rather than hidden runtime state. Running through all of it is a broader research view, that location and whereabouts are not secondary details, but central signals in how a system interprets scenes, updates memory, and reasons about revisitation.
 series: Engineering AI for Recognition and Memory
-platform: DEV, Hashnode, Hashnoon, Medium
-cover image: Consolidating%20an%20Offline-First%20Episodic%20Memory%20Sys/hero.png
-Last edited time: April 11, 2026 5:21 PM
+platform: [DEV, Hashnode, Hashnoon, Medium]
+cover_image: images/hero.png
+Last edited time: "April 11, 2026 5:21 PM"
 dash for layout: -
+updatedAt: 2026-04-11
+---
 
 There is a point in some projects where separate experiments stop feeling separate, and start revealing themselves as parts of the same system.
 
@@ -29,7 +31,7 @@ This is not a finished system. It is still very much a work in progress, and tha
 
 I wanted to document not only what the project currently is, but also how I am thinking about it, what I decided to merge, what I chose to defer, what seems most important right now, and why I keep coming back to the idea that location and whereabouts are central to building useful memory systems.
 
-![High level arch.png](Consolidating%20an%20Offline-First%20Episodic%20Memory%20Sys/High_level_arch.png)
+![High level arch.png](images/High_level_arch.png)
 
 ## The Current Shape of the Project
 
@@ -37,11 +39,12 @@ The project is now converging around one canonical Python package, `episodic_mem
 
 At a practical level, that means I am no longer treating the root package, the working-memory subsystem, and the legacy episodic-memory-agent as separate active products. Instead, I am absorbing the useful parts into one architecture.
 
-The active structure is simple:
-
 - one canonical Python package at `src/episodic_memory/`
+
 - one canonical Next.js dashboard in `dashboard/`
+
 - one notebook workspace in `notebooks/`
+
 - archived legacy systems in `archive/`
 
 The important change is not really the directory layout. It is the conceptual shift. I want one project with one truth surface, rather than several parallel implementations carrying overlapping ideas.
@@ -50,23 +53,30 @@ The merged project is offline-first and organized around a single run artifact b
 
 That feels like the right foundation.
 
-![repo structure.png](Consolidating%20an%20Offline-First%20Episodic%20Memory%20Sys/repo_structure.png)
+![repo structure.png](images/repo_structure.png)
 
 ## What the System Does Right Now
 
 At the moment, the canonical runtime supports two active modes end to end:
 
 - **stub mode**, for deterministic scenario execution
+
 - **panorama mode**, for image or video exploration tied to location identification
 
 Every run produces one canonical bundle containing files such as:
 
 - `manifest.json`
+
 - `summary.json`
+
 - `memories.json`
+
 - `graph.json`
+
 - `events.jsonl`
+
 - `memory_decisions.jsonl`
+
 - `steps/step_XXXX.snapshot.json`
 
 That bundle is the contract.
@@ -78,14 +88,23 @@ So this project is as much about memory transparency as it is about memory itsel
 Each canonical step snapshot records things like:
 
 - location hypotheses
+
 - match evaluation
+
 - evidence bundle
+
 - memory delta
+
 - graph state
+
 - candidate ideas
+
 - writeback candidates
+
 - write decisions
+
 - node lifecycle changes
+
 - debug records
 
 That means the project is not just building memory. It is building an inspectable trace of memory formation, and also of memory refusal.
@@ -99,8 +118,11 @@ One of the biggest decisions I made was to stop preserving the old boundaries as
 At one point, I had:
 
 - root cognition, working-memory, and transparency work
+
 - a separate working-memory subsystem identity
+
 - a legacy panorama and location-identification codebase
+
 - separate inspection habits across notebooks and dashboard
 
 That structure made sense while the ideas were still exploratory. Over time, though, it started creating the wrong incentives. There was too much translation, too many implied contracts, and too many places where one surface knew something another surface did not.
@@ -114,8 +136,11 @@ This is a clean break. It is not a compatibility-first architecture. It is a coh
 That also meant making a few related decisions:
 
 - old public package names should not remain as long-term compatibility shims
+
 - the working-memory subsystem should be absorbed, not preserved as a separate installable identity
+
 - the legacy episodic-memory-agent should be archived once the useful ideas and import paths are absorbed
+
 - Unity should remain part of the long-term plan, but not be required for the first merged version
 
 That last decision matters more than it may seem.
@@ -124,7 +149,7 @@ A project like this can easily become a hostage to future ambition. I do not wan
 
 That keeps the current work honest: build the canonical memory runtime first, make it observable, make it testable, make it inspectable, then expand.
 
-![software ingest.png](Consolidating%20an%20Offline-First%20Episodic%20Memory%20Sys/software_ingest.png)
+![software ingest.png](images/software_ingest.png)
 
 ## The Core Idea I Keep Returning To: Location Matters
 
@@ -143,10 +168,15 @@ I think of it more as a concurrent process that develops alongside object recogn
 That is increasingly how I see it:
 
 - object
+
 - pose
+
 - location
+
 - relation
+
 - revisitation
+
 - memory update
 
 These may not be serial modules so much as mutually constraining signals.
@@ -157,7 +187,7 @@ That is one reason this project currently emphasizes panorama and location-memor
 
 That may sound narrower than “general intelligence,” but I do not think it is narrow in the wrong way. I think it is one of the most grounding places to start.
 
-![1.png](Consolidating%20an%20Offline-First%20Episodic%20Memory%20Sys/1.png)
+![1.png](images/1.png)
 
 ## The Way I Am Thinking About It So Far
 
@@ -174,9 +204,13 @@ Stub scenarios and panorama exploration should not become separate worlds. They 
 That shared pipeline should cover:
 
 - perception or input normalization
+
 - location matching
+
 - working-memory update
+
 - write-decision evaluation
+
 - artifact emission
 
 This makes the system easier to reason about, and it makes cross-mode comparison possible.
@@ -185,13 +219,16 @@ This makes the system easier to reason about, and it makes cross-mode comparison
 
 A saved memory without context is not enough.
 
-I want to know:
-
 - what candidates existed
+
 - what evidence was considered
+
 - what was skipped
+
 - what was written
+
 - how graph state changed
+
 - what confidence or match structure led to the decision
 
 So transparency is not a side feature here. It is part of the architecture.
@@ -230,13 +267,16 @@ That may sound small, but naming matters. It signals where the center of gravity
 
 ### The canonical layout
 
-The active project consists of:
-
 - `episodic_memory.inputs`
+
 - `episodic_memory.pipeline`
+
 - `episodic_memory.memory`
+
 - `episodic_memory.artifacts`
+
 - `episodic_memory.inspector`
+
 - `episodic_memory.wm`
 
 This is the architecture I want to build on top of, rather than around.
@@ -246,20 +286,25 @@ This is the architecture I want to build on top of, rather than around.
 The execution model is intentionally straightforward:
 
 1. an input mode produces normalized observation data
+
 2. the working-memory engine updates graph state and decision traces
+
 3. the location-memory store maintains records, matches, and deltas
+
 4. a canonical step snapshot is emitted
+
 5. the artifact writer persists the run bundle
+
 6. notebooks, the inspector API, and the dashboard inspect those files
 
 That is the project in one sentence.
 
 ### The canonical notebooks
 
-I want three main notebooks:
-
 - pipeline workspace
+
 - memory explorer
+
 - run comparison and dashboard parity
 
 These are not side utilities. They are part of the development surface of the system.
@@ -269,10 +314,15 @@ These are not side utilities. They are part of the development surface of the sy
 The dashboard is read-only by design right now. It exists to inspect:
 
 - run summaries
+
 - timeline
+
 - memories
+
 - graph and topology
+
 - evidence and matches
+
 - save and skip decisions
 
 This is an inspection system, not yet a control room.
@@ -284,10 +334,15 @@ Because this is still a work in progress, it helps to be explicit about what is 
 I am still working through questions such as:
 
 - how rich the memory-detail rendering should become
+
 - how best to compare bundles for regression analysis
+
 - how much panorama-specific interpretability should be preserved directly in the dashboard
+
 - how to calibrate match behavior across more varied scenes
+
 - how much graph state is enough for transparency without overwhelming the inspection surface
+
 - how Unity should eventually plug in without distorting the canonical artifact contract
 
 There is also a deeper unresolved question underneath the implementation work:
@@ -313,9 +368,13 @@ I keep returning to offline-first design because it imposes a discipline that re
 If the system has to produce a persisted run bundle that stands on its own, then:
 
 - the contract has to be real
+
 - the evidence has to be portable
+
 - the inspector has to be decoupled
+
 - the dashboard has to render from artifacts, not hidden runtime assumptions
+
 - notebooks have to operate on the same saved outputs as everything else
 
 In other words, offline-first architecture forces honesty.
@@ -352,7 +411,7 @@ That is also why I keep returning to Thousand Brains and Monty. Their framing of
 
 My own emphasis, at least in this phase, is that location and whereabouts should be treated as first-class signals in that story. Not as an afterthought, and not as metadata, but as part of how the system decides what it is encountering and whether that encounter should become memory.
 
-![Runtime vs artifact.png](Consolidating%20an%20Offline-First%20Episodic%20Memory%20Sys/Runtime_vs_artifact.png)
+![Runtime vs artifact.png](images/Runtime_vs_artifact.png)
 
 ## Why I Am Publishing This Before It Is Done
 
@@ -367,16 +426,20 @@ Second, it preserves the reasoning behind the project while that reasoning is st
 Too many project writeups happen after the fact and make the final architecture look inevitable. That is almost never true. In this case, the actual story is messier, and I think more useful:
 
 - multiple active threads of work
+
 - a decision to unify them
+
 - a belief that transparency matters
+
 - a growing conviction that location is central
+
 - a deliberate choice not to let future embodiment concerns block present architectural coherence
 
 That is the real work in progress.
 
 And that is the part I most want documented.
 
-![Sketch ideas.png](Consolidating%20an%20Offline-First%20Episodic%20Memory%20Sys/Sketch_ideas.png)
+![Sketch ideas.png](images/Sketch_ideas.png)
 
 ## Closing
 
@@ -402,7 +465,7 @@ For now, this is the work: make the memory system coherent, transparent, and rea
 
 Everything else can build on that.
 
-![publis api.png](Consolidating%20an%20Offline-First%20Episodic%20Memory%20Sys/publis_api.png)
+![publis api.png](images/publis_api.png)
 
 ## Explore the Repository
 
@@ -411,3 +474,4 @@ If you want to see the project itself, the repository is here:
 **GitHub Repo:** [https://github.com/ZSturman/Episodic-Memory-Agent](https://github.com/ZSturman/Episodic-Memory-Agent)
 
 The codebase reflects the same transition described in this post, from separate lines of work toward one more coherent episodic memory architecture. That context may make the repository easier to navigate, especially if you are interested in the runtime, artifact structure, or inspection surfaces.
+
