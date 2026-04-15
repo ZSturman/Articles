@@ -475,3 +475,5 @@ If you want to see the project itself, the repository is here:
 
 The codebase reflects the same transition described in this post, from separate lines of work toward one more coherent episodic memory architecture. That context may make the repository easier to navigate, especially if you are interested in the runtime, artifact structure, or inspection surfaces.
 
+If you want the earlier, narrower stepping stone into this same line of work, I wrote about that here: [https://zachary-sturman.com/articles/building-a-location-first-learning-agent-to-explore-context-memory-and-consciousness](https://zachary-sturman.com/articles/building-a-location-first-learning-agent-to-explore-context-memory-and-consciousness).
+

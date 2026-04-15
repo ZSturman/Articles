@@ -288,7 +288,7 @@ This is where Notion becomes much more than a note-taking space for me. It becom
 
 I go into the backend side of that more in another write-up:
 
-[Placeholder Link: Syncing My Portfolio with Notion]
+[https://zachary-sturman.com/articles/how-i-sync-my-portfolio-using-notion](https://zachary-sturman.com/articles/how-i-sync-my-portfolio-using-notion)
 
 That article covers the broader workflow, including how I connect Notion with the rest of my automation pipeline.
 
@@ -400,10 +400,10 @@ There is still more to the broader workflow than what I covered here. In particu
 
 For that side of it, I will point to a separate breakdown:
 
-[Placeholder Link: Syncing My Portfolio with Notion]
+[https://zachary-sturman.com/articles/how-i-sync-my-portfolio-using-notion](https://zachary-sturman.com/articles/how-i-sync-my-portfolio-using-notion)
 
 And if you want to understand the task side more deeply: [https://zachary-sturman.com/articles/automating-linear-from-notion](https://zachary-sturman.com/articles/automating-linear-from-notion)
 
 If you want to know how I built this system, want help setting up something similar for yourself, or have ideas for ways I could optimize it further, feel free to reach out through my contact page.
 
-You can also check out my portfolio here: [zachary-sturman.com](http://zachary-sturman.com/)
+You can also check out my portfolio here: [zachary-sturman.com](https://zachary-sturman.com/)

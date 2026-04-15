@@ -29,7 +29,7 @@ At a high level, the process is simple: I manage project information in Notion, 
 
 A lot of the structure in this pipeline is also a holdover from an older project of mine called Folio. The current site no longer runs through Folio itself, but parts of the naming and architecture still come from that earlier phase. That is why one of the main scripts is still called lib/folio-prebuild.py even though the portfolio is now built from Notion, n8n, JSON exports, and static publishing.
 
-I am writing more about that backstory separately at [zachary-sturman.com/articles/the-art-of-turning-a-90-minute-task-into-a-2-month-automation-project](https://zachary-sturman.com/articles/the-art-of-turning-a-90-minute-task-into-a-2-month-automation-project), but the short version is that I spent a long time trying to build a structured project record that could feed multiple outputs. I no longer use that system directly, but the output-oriented thinking survived, and this pipeline is what that evolved into.
+I am writing more about that backstory separately at [zachary-sturman.com/articles/the-art-of-turning-a-90-minute-task-into-a-2-month](https://zachary-sturman.com/articles/the-art-of-turning-a-90-minute-task-into-a-2-month), but the short version is that I spent a long time trying to build a structured project record that could feed multiple outputs. I no longer use that system directly, but the output-oriented thinking survived, and this pipeline is what that evolved into.
 
 ## **Notion is where the content starts**
 
@@ -41,7 +41,7 @@ That is where I keep the project information that eventually becomes the portfol
 
 I have a separate article about how I use Notion for this in more detail here:
 
-[**zachary-sturman.com/articles/how-i-use-notion-to-track-my-projects](http://zachary-sturman.com/articles/how-i-use-notion-to-track-my-projects)**
+[https://zachary-sturman.com/articles/how-i-use-notion-to-track-my-projects](https://zachary-sturman.com/articles/how-i-use-notion-to-track-my-projects)
 
 So I do not want to repeat all of that here. The relevant part for this article is just the handoff: Notion is where the information is authored and organized, but it is not where the portfolio gets assembled.
 

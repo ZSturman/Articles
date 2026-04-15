@@ -142,6 +142,8 @@ That is probably the clearest way I can describe the project right now. I starte
 
 I will post more about it after I have a better sense of what it can and cannot do. If you have thoughts about location, context, or memory design, I would be interested to hear them. The project is still early enough that those conversations can still influence how I shape the next layers.
 
+If you want the broader architectural direction this is growing into, I wrote more about that here: [https://zachary-sturman.com/articles/consolidating-an-offline-first-episodic-memory-system](https://zachary-sturman.com/articles/consolidating-an-offline-first-episodic-memory-system).
+
 ![01v2_cli_to_core_execution_map.png](images/01v2_cli_to_core_execution_map.png)
 
 If you want to follow along you can find the repo here:
