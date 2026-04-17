@@ -1,26 +1,11 @@
 ---
 title: How I Use Notion to Ingest, Organize, and Track My Projects
-to draft: 0
-to review: 0
-action required: Finalize draft
-status: ready to publish
-exported?: No
-draft finalized?: No
-pushed to articles repo?: No
-scheduled: No
 projects: "My Notion Pipeline (https://www.notion.so/My-Notion-Pipeline-304aec944d3c8029a1b1ea0f92487137?pvs=21)"
 tags: [AI, API Integration, ML, Notion, Productivity]
 summary: This Notion setup is a guided project intake workflow rather than a simple notes system: each project starts from a template, highlights the highest-priority next step, and builds toward execution, portfolio readiness, and future automation. By checking key setup steps automatically and separating projects, tasks, assets, resources, and milestones into linked systems, it reduces friction and makes the workflow easier to manage as it scales.
 series: My Notion Pipeline
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/cover_image.png
-posted: No
-versions:
-	- FOR NOTION PROJECT INGEST POST (https://www.notion.so/FOR-NOTION-PROJECT-INGEST-POST-327aec944d3c80a0b4dac22d5758b1ec?pvs=21)
-	- How I Use Notion to Ingest, Organize, and Track My Projects (https://www.notion.so/How-I-Use-Notion-to-Ingest-Organize-and-Track-My-Projects-335aec944d3c80ec8214f1bf76efe671?pvs=21)
-in review: 0/2
-drafting: 0/2
-Last edited time: April 1, 2026 3:06 AM
 updatedAt: 2026-04-01
 ---
 

@@ -1,21 +1,10 @@
 ---
 title: How I Sync My Portfolio Using Notion
-action required: 🟠 Export
-post on: Jul 6
-write by: Apr 13
-status: ready to publish
-draft finalized?: Yes
-exported?: No
-pushed to articles repo?: No
-scheduled: No
-posted: No
 one liner: A portfolio architecture that turns structured project data into a static site through a local publishing pipeline.
 tags: [Automation, CI/CD, Firebase, GitHub Actions, Next.js, Notion, Python, n8n]
 summary: How a portfolio can be built as a publishing pipeline, with Notion as the source of truth, n8n creating a JSON handoff, Python scripts normalizing content and media, and Next.js exporting the final static site. The result is a cleaner separation between editing, transformation, and publishing, making the site more predictable and maintainable.
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/Hero_image.png
-Last edited time: "April 8, 2026 8:00 AM"
-dash for layout: -
 updatedAt: 2026-04-08
 ---
 

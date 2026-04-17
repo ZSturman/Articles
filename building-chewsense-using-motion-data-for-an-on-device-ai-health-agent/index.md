@@ -1,14 +1,5 @@
 ---
 title: Building ChewSense - Using Motion Data For An On-Device AI Health Agent
-action required: 🟠 Export
-post on: Jun 30
-write by: Apr 9
-status: ready to publish
-draft finalized?: Yes
-exported?: No
-pushed to articles repo?: No
-scheduled: No
-posted: No
 projects: "ChewSense (https://www.notion.so/ChewSense-306aec944d3c808d9adaf0ccca484d3b?pvs=21)"
 one liner: A first-person build story about turning AirPods motion data, synchronized video, and disciplined tooling into a believable on-device chewing-detection ML pipeline.
 tags: [AirPods, Applied ML, ChewSense, Health Tech, Machine Learning, On-Device, Prototyping, Python, Swift, Time-series, Wearables, iOS]
@@ -16,7 +7,6 @@ summary: This article traces how ChewSense evolved from early experiments with r
 series: ChewSense
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/hero.png
-Last edited time: "April 7, 2026 3:47 AM"
 updatedAt: 2026-04-07
 ---
 

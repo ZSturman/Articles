@@ -1,21 +1,11 @@
 ---
 title: Building a Desktop App Around Google Sheets
-action required: 🟡 Push to articles repo
-post on: Jun 25
-write by: Apr 7
-status: ready to publish
-draft finalized?: Yes
-exported?: Yes
-pushed to articles repo?: No
-scheduled: No
-posted: No
 one liner: A manufacturing scheduling project that evolved from a desktop app built around spreadsheet workflows into a web-based system focused on reducing adoption friction.
 tags: [Desktop App, Google Sheets, Manufacturing, SaaS, Spreadsheets, Systems Design, Tauri, Web App]
 summary: This project began after seeing a manufacturer manage production schedules through emailed Excel files, which exposed how much critical operational work was being held together by fragile spreadsheet workflows. It started as a desktop app built around those existing habits, but the bigger lesson was that the real challenge was not just replacing spreadsheets, it was reducing the friction of adoption. That led to a web-based version focused on easier onboarding, configuration, and reusable workflow views, with the project ultimately becoming a lesson in testing earlier and designing for usability before technical ambition.
 series: Using Google Sheets as an Application Database
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/Spreadsheet_chaos_scene.png
-Last edited time: "April 7, 2026 2:59 AM"
 updatedAt: 2026-04-07
 ---
 

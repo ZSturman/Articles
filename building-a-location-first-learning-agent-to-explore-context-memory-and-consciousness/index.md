@@ -1,12 +1,5 @@
 ---
 title: Building a Location-First Learning Agent to Explore Context, Memory, and Consciousness
-post order: 2
-action required: 🔴 Set status
-draft finalized?: Yes
-exported?: Yes
-pushed to articles repo?: Yes
-scheduled: No
-posted: No
 link to repo: "https://github.com/ZSturman/Train-of-Thought-Agent"
 projects: "Train of Thought Agent (https://www.notion.so/Train-of-Thought-Agent-332aec944d3c807aba3bd0950cd03a66?pvs=21), Episodic Memory Agent (https://www.notion.so/Episodic-Memory-Agent-306aec944d3c800597abd4572f1ab679?pvs=21)"
 one liner: A location-first learning agent that turns user and sensor input into inspectable memory, then grows toward a broader synthetic memory-and-attention engine.
@@ -14,7 +7,6 @@ tags: [AI, Adaptive, CLI, Learning, Location, ML, Python, Sensor, State Manageme
 summary: "This explores the idea that recognition comes more from place, context, and repeated reinforcement than detached labels, using an inspectable Python CLI agent that learns locations from sensor observations and stores state plainly. It evolves from simple grayscale location memory into richer, modality-neutral location and concept structures, with a roadmap toward broader memory processes like activation, replay, resurfacing, and reconsolidation."
 series: Engineering AI for Recognition and Memory
 cover_image: images/cover_image.png
-Last edited time: "April 4, 2026 3:57 PM"
 updatedAt: 2026-04-04
 ---
 

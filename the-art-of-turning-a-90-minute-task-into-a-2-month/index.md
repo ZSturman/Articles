@@ -1,14 +1,5 @@
 ---
 title: The Art of Turning a 90-Minute Task Into a 2-Month Automation Project
-action required: 🟠 Export
-post on: Jul 11
-write by: Apr 16
-status: ready to publish
-draft finalized?: Yes
-exported?: No
-pushed to articles repo?: No
-scheduled: No
-posted: No
 projects: "Folio (https://www.notion.so/Folio-324aec944d3c8068a8a7ed6d1d4d1790?pvs=21), My Notion Pipeline (https://www.notion.so/My-Notion-Pipeline-304aec944d3c8029a1b1ea0f92487137?pvs=21)"
 one liner: A reflection on building four generations of project-and-portfolio management tools, and why a simpler integrated workflow ultimately beat a fully custom app.
 tags: [Automation, Note Taking, Notion, Obsidian, Portfolio, Product Design, React, Swift, macOS]
@@ -16,8 +7,6 @@ summary: The article traces the evolution of four systems - Obsidian + Project M
 series: My Notion Pipeline
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/Concept_art_with_Logo.jpeg
-Last edited time: "April 8, 2026 5:20 PM"
-dash for layout: -
 updatedAt: 2026-04-08
 ---
 

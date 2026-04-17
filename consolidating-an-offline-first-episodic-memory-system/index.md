@@ -1,14 +1,5 @@
 ---
 title: Consolidating an Offline-First Episodic Memory System
-action required: 🟠 Export
-post on: Jul 21
-write by: Apr 20
-status: ready to publish
-draft finalized?: Yes
-exported?: No
-pushed to articles repo?: No
-scheduled: No
-posted: No
 projects: "Episodic Memory Agent (https://www.notion.so/Episodic-Memory-Agent-306aec944d3c800597abd4572f1ab679?pvs=21)"
 one liner: This project is becoming a single offline-first episodic memory system that brings runtime, artifacts, and inspection into one coherent architecture, with location playing a central role in how memory is formed and understood.
 tags: [Dashboard, Episodic Memory, Monty, Synthetic Memory, Thousand Brains Projects]
@@ -16,8 +7,6 @@ summary: This piece traces the consolidation of several related experiments into
 series: Engineering AI for Recognition and Memory
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/hero.png
-Last edited time: "April 11, 2026 5:21 PM"
-dash for layout: -
 updatedAt: 2026-04-11
 ---
 
