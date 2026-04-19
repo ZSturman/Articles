@@ -1,7 +1,7 @@
 ---
 title: The Wolf Project - Reworking a Real-World Project
 link to repo: "https://github.com/ZSturman/The-Wolf-Pack"
-projects: "The Wolf Pack (https://www.notion.so/The-Wolf-Pack-346aec944d3c801e851fc7e727f0e186?pvs=21)"
+projects: "The Wolf Pproject"
 one liner: Rebuilding The Wolf Project’s site into a structured, scalable platform to better support real rescue work.
 tags: [Dogs, Firebase, Next.js, Nonprofit, Web App, Welfare]
 summary: After discovering The Wolf Project through a Dodo video, I connected with the team and began rebuilding their website to better support their needs. The new version introduces structured data, dynamic content, and scalable infrastructure using Next.js, Firebase, and Cloudinary. It’s now a usable foundation that can evolve into a more complete system for showcasing cases, managing content, and supporting contributions.
