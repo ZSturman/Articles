@@ -15,7 +15,7 @@ A few weeks ago I watched a Dodo video about The Wolf Project that stayed with m
 
 [https://www.youtube.com/watch?v=NMf8mlxO4sk](https://www.youtube.com/watch?v=NMf8mlxO4sk)
 
-After that, I tried to find more information about what I had just watched. When I googled ‘the wolf pack’ there was obviously a lot of options so I went to their Instagram page:
+After that, I tried to find more information about what I had just watched. When I googled ‘the wolf project’ there was obviously a lot of options so I went to their Instagram page:
 
 [https://www.instagram.com/_wolf_project/](https://www.instagram.com/_wolf_project/)
 
