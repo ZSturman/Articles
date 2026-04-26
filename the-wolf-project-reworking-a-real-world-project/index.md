@@ -1,6 +1,6 @@
 ---
 title: The Wolf Project - Reworking a Real-World Project
-link to repo: "https://github.com/ZSturman/The-Wolf-Pack"
+link to repo: "https://github.com/ZSturman/The-Wolf-Project"
 projects: "The Wolf Pproject"
 one liner: Rebuilding The Wolf Project’s site into a structured, scalable platform to better support real rescue work.
 tags: [Dogs, Firebase, Next.js, Nonprofit, Web App, Welfare]
@@ -9,6 +9,8 @@ series: The Wolf Project
 platform: [DEV]
 cover_image: imgaes/Wolf-hero.webp
 updatedAt: 2026-04-18
+publishedAt: 2026-04-28
+status: ready to post
 ---
 
 A few weeks ago I watched a Dodo video about The Wolf Project that stayed with me more than I expected.
