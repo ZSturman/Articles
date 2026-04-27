@@ -4,10 +4,11 @@ import argparse
 import logging
 import sys
 import time
+from datetime import date
 from pathlib import Path
 
 from . import config
-from .discover import Article, discover_articles
+from .discover import Article, discover_articles, ensure_published_at
 from .platforms import PublishResult, get_platform_registry
 from .state import PublishState
 from .transform import cover_image_url, tags_for_platform, transform_for_platform
@@ -170,6 +171,8 @@ def publish_article(
 
     errors = []
     content_hash = state.content_hash(article.index_path)
+    publish_date = date.today().isoformat()
+    published_at_processed = bool(str(article.raw_frontmatter.get("publishedAt", "")).strip())
     registry = get_platform_registry()
 
     for platform in platforms:
@@ -209,7 +212,20 @@ def publish_article(
                 result = client.publish(article, body, tags, cover)
                 logger.info("[%s] %s — published: %s", platform, article.slug, result.url)
 
-            state.record_publish(article.slug, platform, result.post_id, result.url, content_hash)
+            final_hash = content_hash
+            if not published_at_processed:
+                try:
+                    if ensure_published_at(article, publish_date):
+                        final_hash = state.content_hash(article.index_path)
+                        content_hash = final_hash
+                        logger.info("%s — added publishedAt: %s", article.slug, publish_date)
+                    published_at_processed = True
+                except Exception as exc:
+                    published_at_processed = True
+                    logger.error("%s — published successfully but failed to write publishedAt: %s", article.slug, exc)
+                    errors.append(f"frontmatter: failed to write publishedAt for {article.slug}: {exc}")
+
+            state.record_publish(article.slug, platform, result.post_id, result.url, final_hash)
 
         except NotImplementedError as e:
             logger.warning("[%s] %s — %s", platform, article.slug, e)

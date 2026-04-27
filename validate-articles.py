@@ -26,6 +26,7 @@ REPO_ROOT = Path(__file__).parent
 MARKDOWN_INDEX_NAMES = {"index.md", "index.markdown"}
 MARKDOWN_FILE_EXTS = {".md", ".markdown"}
 FRONTMATTER_BOUNDARY = "---"
+HASHNODE_SUBTITLE_MAX_LENGTH = 250
 
 REQUIRED_FRONTMATTER_FIELDS = ["title", "summary"]
 
@@ -266,6 +267,19 @@ def validate_frontmatter(metadata: Dict[str, Any], slug: str) -> List[str]:
     return errors
 
 
+def collect_frontmatter_warnings(metadata: Dict[str, Any]) -> List[str]:
+    warnings: List[str] = []
+    summary = metadata.get("summary")
+    if summary is not None:
+        summary_text = str(summary).strip()
+        if len(summary_text) > HASHNODE_SUBTITLE_MAX_LENGTH:
+            warnings.append(
+                f'Summary is {len(summary_text)} characters; Hashnode subtitles are limited to '
+                f'{HASHNODE_SUBTITLE_MAX_LENGTH} and will be truncated during publish'
+            )
+    return warnings
+
+
 def _is_relative_target(target: str) -> bool:
     stripped = target.strip()
     if not stripped:
@@ -306,9 +320,10 @@ def validate_media(
     return errors
 
 
-def validate_article(article: Dict[str, Any]) -> List[str]:
-    """Run all validations for a single article. Returns list of error strings."""
+def validate_article(article: Dict[str, Any]) -> Tuple[List[str], List[str]]:
+    """Run all validations for a single article. Returns (errors, warnings)."""
     errors: List[str] = []
+    warnings: List[str] = []
     layout = article["layout"]
     slug = article["slug"]
 
@@ -326,19 +341,19 @@ def validate_article(article: Dict[str, Any]) -> List[str]:
             f"Directory \"{article['folder_name']}\" is missing index.md — "
             "create an index.md file inside this folder"
         )
-        return errors  # Can't check frontmatter without a file
+        return errors, warnings  # Can't check frontmatter without a file
 
     index_path: Path = article["index_path"]
     if not index_path.exists():
         errors.append(f"Markdown file not found: {index_path}")
-        return errors
+        return errors, warnings
 
     # 3. Read and validate frontmatter
     try:
         text = index_path.read_text(encoding="utf-8")
     except Exception as exc:
         errors.append(f"Cannot read {index_path}: {exc}")
-        return errors
+        return errors, warnings
 
     # Strip BOM
     text = text.lstrip("\ufeff")
@@ -348,6 +363,7 @@ def validate_article(article: Dict[str, Any]) -> List[str]:
 
     if metadata is not None:
         errors.extend(validate_frontmatter(metadata, slug))
+        warnings.extend(collect_frontmatter_warnings(metadata))
 
     # 4. Validate embedded media files exist and are readable
     content_to_scan = body if body else text
@@ -369,7 +385,7 @@ def validate_article(article: Dict[str, Any]) -> List[str]:
             if not resolved_cover.exists():
                 errors.append(f"Missing cover image: {decoded_cover} (referenced in frontmatter)")
 
-    return errors
+    return errors, warnings
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
@@ -397,22 +413,30 @@ def main() -> int:
         return 0
 
     total_errors = 0
-    article_results: List[Tuple[str, str, List[str]]] = []
+    total_warnings = 0
+    article_results: List[Tuple[str, str, List[str], List[str]]] = []
 
     for article in articles:
         label = article["folder_name"] or article["path"].name
         layout = article["layout"]
-        errors = validate_article(article)
-        article_results.append((label, layout, errors))
+        errors, warnings = validate_article(article)
+        article_results.append((label, layout, errors, warnings))
         total_errors += len(errors)
+        total_warnings += len(warnings)
 
     # Print results
-    for label, layout, errors in article_results:
+    for label, layout, errors, warnings in article_results:
         layout_tag = "dir " if layout == "directory" else "file"
         if errors:
             print(f"  {RED}FAIL{RESET}  [{layout_tag}] {BOLD}{label}{RESET}")
             for err in errors:
                 print(f"        {RED}>{RESET} {err}")
+            for warning in warnings:
+                print(f"        {YELLOW}!{RESET} {warning}")
+        elif warnings:
+            print(f"  {YELLOW}WARN{RESET}  [{layout_tag}] {BOLD}{label}{RESET}")
+            for warning in warnings:
+                print(f"        {YELLOW}!{RESET} {warning}")
         else:
             print(f"  {GREEN} OK {RESET}  [{layout_tag}] {BOLD}{label}{RESET}")
 
@@ -445,7 +469,10 @@ def main() -> int:
         print()
         return 1
 
-    print(f"{GREEN}{BOLD}  All {len(articles)} article(s) valid — push allowed{RESET}\n")
+    summary = f"  All {len(articles)} article(s) valid — push allowed"
+    if total_warnings:
+        summary += f" with {total_warnings} warning(s)"
+    print(f"{GREEN}{BOLD}{summary}{RESET}\n")
     return 0
 
 

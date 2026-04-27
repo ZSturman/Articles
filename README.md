@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 ### 2. Set API keys
 
-Export the tokens for the platforms you want to publish to. You only need the ones you use.
+Export the tokens for the platforms you want to publish to, or put them in a `.env` file at the repo root. You only need the ones you use.
 
 ```bash
 # DEV.to — get your key at https://dev.to/settings/extensions
@@ -64,12 +64,21 @@ export DEVTO_API_KEY="your-devto-api-key"
 
 # Hashnode — get your token at https://hashnode.com/settings/developer
 export HASHNODE_TOKEN="your-hashnode-token"
-# Find your publication ID in your Hashnode dashboard URL or via their API
-export HASHNODE_PUBLICATION_ID="your-publication-id"
+# Supports a publication ObjectId, blog host/URL, or @username for the authenticated account
+export HASHNODE_PUBLICATION_ID="@your-hashnode-publication"
 
 # Medium (deprecated API — creates drafts only)
 # Get a token at https://medium.com/me/settings/security
 export MEDIUM_TOKEN="your-medium-token"
+```
+
+Example `.env`:
+
+```dotenv
+DEVTO_API_KEY=your-devto-api-key
+HASHNODE_TOKEN=your-hashnode-token
+HASHNODE_PUBLICATION_ID=@your-hashnode-publication
+MEDIUM_TOKEN=your-medium-token
 ```
 
 A platform is active only if its key is set. Missing keys simply skip that platform.
@@ -122,6 +131,8 @@ python -m publish my-article --platform devto,hashnode
 ```bash
 python -m publish my-article --force
 ```
+
+After the first successful publish to any platform, the tool writes `publishedAt: YYYY-MM-DD` back to the article frontmatter if that key was missing.
 
 ### Verbose logging
 
@@ -200,7 +211,9 @@ https://raw.githubusercontent.com/ZSturman/Articles/main/<slug>/images/photo.jpg
 
 ### Hashnode tag resolution
 
-Hashnode requires tag IDs, not plain strings. The tool searches for each tag by name via the Hashnode API and uses the closest match. If a tag isn't found, it's skipped with a warning.
+Hashnode accepts tags as name/slug pairs. The tool slugifies your frontmatter tags locally and sends them directly, so publishing does not depend on a separate tag lookup request.
+
+Hashnode also caps subtitles at 250 characters. If an article summary is longer than that, the Hashnode publisher truncates it before sending the post.
 
 ---
 

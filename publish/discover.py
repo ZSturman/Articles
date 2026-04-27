@@ -3,6 +3,7 @@
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
 import frontmatter
 
@@ -39,6 +40,42 @@ def _extract_first_h1(body: str) -> str:
     """Pull the first # heading from markdown body as a fallback title."""
     match = re.search(r"^#\s+\**(.+?)\**\s*$", body, re.MULTILINE)
     return match.group(1).strip() if match else ""
+
+
+def _serialize_frontmatter(metadata: dict[str, Any]) -> str:
+    """Serialize metadata using the repo's existing simple frontmatter style."""
+    lines = ["---"]
+    for key, value in metadata.items():
+        if isinstance(value, list):
+            items = ", ".join(str(item) for item in value)
+            lines.append(f"{key}: [{items}]")
+        elif value is None:
+            continue
+        else:
+            text = str(value)
+            if ":" in text or text.startswith(("{", "[", '"', "'")):
+                lines.append(f'{key}: "{text}"')
+            else:
+                lines.append(f"{key}: {text}")
+    lines.append("---")
+    return "\n".join(lines)
+
+
+def ensure_published_at(article: "Article", published_at: str) -> bool:
+    """Persist publishedAt to an article file if it is currently missing."""
+    existing = article.raw_frontmatter.get("publishedAt")
+    if existing is not None and str(existing).strip():
+        return False
+
+    updated_metadata = dict(article.raw_frontmatter)
+    updated_metadata["publishedAt"] = published_at
+
+    frontmatter_text = _serialize_frontmatter(updated_metadata)
+    body = article.body.lstrip("\n")
+    serialized = frontmatter_text if not body else f"{frontmatter_text}\n\n{body}"
+    article.index_path.write_text(serialized + "\n", encoding="utf-8")
+    article.raw_frontmatter = updated_metadata
+    return True
 
 
 def discover_articles(repo_root: Path, slugs: list[str] | None = None) -> list[Article]:
