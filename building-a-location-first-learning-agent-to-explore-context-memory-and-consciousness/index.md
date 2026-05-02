@@ -4,10 +4,12 @@ link to repo: "https://github.com/ZSturman/Train-of-Thought-Agent"
 projects: "Train of Thought Agent (https://www.notion.so/Train-of-Thought-Agent-332aec944d3c807aba3bd0950cd03a66?pvs=21), Episodic Memory Agent (https://www.notion.so/Episodic-Memory-Agent-306aec944d3c800597abd4572f1ab679?pvs=21)"
 one liner: A location-first learning agent that turns user and sensor input into inspectable memory, then grows toward a broader synthetic memory-and-attention engine.
 tags: [AI, Adaptive, CLI, Learning, Location, ML, Python, Sensor, State Management, Synthetic Memory]
-summary: "This explores the idea that recognition comes more from place, context, and repeated reinforcement than detached labels, using an inspectable Python CLI agent that learns locations from sensor observations and stores state plainly. It evolves from simple grayscale location memory into richer, modality-neutral location and concept structures, with a roadmap toward broader memory processes like activation, replay, resurfacing, and reconsolidation."
+summary: This explores the idea that recognition comes more from place, context, and repeated reinforcement than detached labels, using an inspectable Python CLI agent that learns locations from sensor observations and stores state plainly. It evolves from simple grayscale location memory into richer, modality-neutral location and concept structures, with a roadmap toward broader memory processes like activation, replay, resurfacing, and reconsolidation.
 series: Engineering AI for Recognition and Memory
 cover_image: images/cover_image.png
 updatedAt: 2026-04-04
+status: ready to post
+publishedAt: 2026-05-02
 ---
 
 Maybe recognition is less about detached labels than it is about where something is, what surrounds it, and how that context gets reinforced. That is what pushed me to build this repo. I wanted a smaller problem that still felt close to the thing I cared about. The question that kept pulling me back was whether location and context are a big part of knowing something at all, and whether they help make object recognition faster and more grounded.
@@ -149,4 +151,3 @@ If you want to follow along you can find the repo here:
 - Portfolio: [zachary-sturman.com](https://zachary-sturman.com/)
 
 - Email: [Zasturman@gmail.com](mailto:Zasturman@gmail.com)
-
