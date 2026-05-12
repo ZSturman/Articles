@@ -79,7 +79,11 @@ class DevToClient(PlatformClient):
                 logger.warning("DEV.to server error %d, retrying in %ds", resp.status_code, wait)
                 time.sleep(wait)
                 continue
+            if 400 <= resp.status_code < 500:
+                logger.debug("DEV.to error response body: %s", resp.text)
             resp.raise_for_status()
             return resp
+        if 400 <= resp.status_code < 500:
+            logger.debug("DEV.to error response body: %s", resp.text)
         resp.raise_for_status()
         return resp

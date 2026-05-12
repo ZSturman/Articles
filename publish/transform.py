@@ -76,10 +76,10 @@ def tags_for_platform(article: Article, platform: str) -> list[str]:
         # Medium: max 5 tags, 25 chars each
         tags = [t[:25] for t in tags[:5]]
     if platform == "devto":
-        # DEV.to: max 4 tags, lowercase, alphanumeric/hyphens only
+        # DEV.to: max 4 tags, lowercase, alphanumeric only (no hyphens)
         cleaned = []
         for t in tags[:4]:
-            tag = re.sub(r"[^a-z0-9-]", "", t.lower().replace(" ", "-"))
+            tag = re.sub(r"[^a-z0-9]", "", t.lower())
             if tag:
                 cleaned.append(tag)
         tags = cleaned

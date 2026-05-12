@@ -6,6 +6,8 @@ summary: How a portfolio can be built as a publishing pipeline, with Notion as t
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/Hero_image.png
 updatedAt: 2026-04-08
+status: ready to post
+publishedAt: 2026-05-12
 ---
 
 For a while now, I have wanted my portfolio to work less like a hand-edited website and more like a publishing pipeline.
@@ -345,4 +347,3 @@ The older Folio work is the reason parts of the naming and structure still look 
 That combination works better for me than trying to make one custom tool do everything.
 
 It lets me keep the structured project record idea that I still care about, without also turning the maintenance of the system itself into the main project.
-
