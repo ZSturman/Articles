@@ -9,6 +9,8 @@ tags: [API Integration, Automation, Linear, Notion, Python, State Management, Sy
 series: Notion as a Source of Truth
 one liner: A reliable sync layer that makes Notion planning and Linear execution behave like a single system.
 updatedAt: 2026-03-25
+status: ready to post
+publishedAt: 2026-05-18
 ---
 
 Planning often starts in Notion because it is flexible and easy to shape around a team’s workflow. Execution often moves into Linear because it is structured, fast, and better at handling active delivery. That split works for a while, until the same projects, milestones, and tasks start living in both places and slowly drift out of sync.
