@@ -7,6 +7,7 @@ series: My Notion Pipeline
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/cover_image.png
 updatedAt: 2026-04-01
+status: ready to post
 ---
 
 Notion is where almost every project I work on starts.
