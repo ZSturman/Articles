@@ -7,6 +7,8 @@ series: Using Google Sheets as an Application Database
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/Spreadsheet_chaos_scene.png
 updatedAt: 2026-04-07
+status: ready to post
+publishedAt: 2026-06-07
 ---
 
 When I moved to Washington after getting back from Australia, a client told me they were emailing Excel files back and forth to manage production schedules. Not a polished internal system, but just spreadsheets moving around between people because that was what they had.
@@ -142,4 +144,3 @@ The better question turned out to be, “What would make this easier for someone
 That is the version of the problem I care more about now.
 
 If you have built internal tools around spreadsheet-heavy workflows, or you have had to rethink a project after building too much too early, I would be glad to compare notes. You can find me at [zachary-sturman.com](https://zachary-sturman.com/), [github.com/zsturman](https://github.com/zsturman), [LinkedIn](https://linkedin.com/in/zacharysturman), or by email at [Zasturman@gmail.com](mailto:Zasturman@gmail.com).
-
