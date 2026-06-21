@@ -17,6 +17,7 @@ API_URL = "https://gql.hashnode.com"
 MAX_RETRIES = 3
 MAX_SUBTITLE_LENGTH = 250
 OBJECT_ID_RE = re.compile(r"^[0-9a-fA-F]{24}$")
+API_ACCESS_CHANGE_URL = "https://hashnode.com/changelog/2026-05-13-graphql-api-paid-access"
 
 
 CREATE_POST_MUTATION = """
@@ -283,6 +284,16 @@ class HashnodeClient(PlatformClient):
         payload = {"query": query, "variables": variables}
         for attempt in range(MAX_RETRIES):
             resp = self.session.post(API_URL, json=payload)
+            final_url = str(resp.url)
+            content_type = resp.headers.get("Content-Type", "")
+            if (
+                "hashnode.com/changelog/2026-05-13-graphql-api-paid-access" in final_url
+                or "text/html" in content_type.lower()
+            ):
+                raise NotImplementedError(
+                    "Hashnode GraphQL API access now requires Hashnode Pro; "
+                    f"skipping Hashnode publish. See {API_ACCESS_CHANGE_URL}"
+                )
             if resp.status_code == 429:
                 retry_after = int(resp.headers.get("Retry-After", 2 ** attempt))
                 logger.warning("Hashnode rate limited, retrying in %ds", retry_after)
@@ -297,13 +308,14 @@ class HashnodeClient(PlatformClient):
             try:
                 data = resp.json()
             except ValueError:
-                data = None
+                raise NotImplementedError(
+                    "Hashnode GraphQL returned a non-JSON response; skipping Hashnode publish. "
+                    f"This may mean the publication needs Hashnode Pro. See {API_ACCESS_CHANGE_URL}"
+                ) from None
             if isinstance(data, dict) and "errors" in data:
                 error_msg = "; ".join(e.get("message", str(e)) for e in data["errors"])
                 raise RuntimeError(f"Hashnode GraphQL error: {error_msg}")
             resp.raise_for_status()
-            if data is None:
-                data = resp.json()
             return data
         resp.raise_for_status()
         return resp.json()

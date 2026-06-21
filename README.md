@@ -233,6 +233,8 @@ Hashnode accepts tags as name/slug pairs. The tool slugifies your frontmatter ta
 
 Hashnode also caps subtitles at 250 characters. If an article summary is longer than that, the Hashnode publisher truncates it before sending the post.
 
+As of May 13, 2026, Hashnode GraphQL API access requires Hashnode Pro on the publication. If the API redirects to the Hashnode API access changelog or returns HTML instead of JSON, the publisher skips Hashnode and continues with the other configured platforms.
+
 ---
 
 ## Error Handling
