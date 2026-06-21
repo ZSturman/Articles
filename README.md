@@ -36,13 +36,16 @@ summary: A short description   # Used as subtitle/description on platforms
 tags:
   - python
   - systems
+status: ready to post          # Required before the publisher will post
+publishAfter: 2026-06-21       # Optional scheduled publish date for automation
 canonical_url: https://...     # Override the auto-derived canonical URL
 cover_image: images/cover.jpg  # Relative path to cover image
 series: My Series Name         # DEV.to series (ignored elsewhere)
 ---
 ```
 
-Any other frontmatter keys (e.g., `publishedAt`, `updatedAt`, project IDs) are silently ignored.
+`publishedAt` is written automatically after a successful publish when it is missing.
+Any other frontmatter keys (e.g., `updatedAt`, project IDs) are silently ignored.
 
 ---
 
@@ -108,6 +111,14 @@ python -m publish designing-a-notion-linear-sync-engine-that-could-actually-be-t
 python -m publish --all
 ```
 
+### Publish only scheduled due articles
+
+```bash
+python -m publish --all --due-only --limit 1
+```
+
+This only selects articles with `status: ready to post`, a `publishAfter` date of today or earlier, and no existing `.publish-state.json` platform entry or `publishedAt` value.
+
 ### Dry run (see what would happen)
 
 ```bash
@@ -142,11 +153,13 @@ python -m publish --all -v
 
 ### Via GitHub Actions
 
-Go to **Actions → Publish Articles → Run workflow** and fill in:
+The workflow runs automatically every day at 17:00 UTC and publishes at most one due unpublished article. You can also go to **Actions → Publish Articles → Run workflow** and fill in:
 - **slug**: article folder name, or `all`
 - **dry_run**: check to preview without publishing
 - **platforms**: `devto`, `hashnode`, `medium`, or `all`
 - **force**: check to re-publish unchanged articles
+- **due_only**: check to publish only articles due by `publishAfter`
+- **limit**: maximum number of articles to publish
 
 ---
 

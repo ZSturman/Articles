@@ -78,6 +78,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="Re-publish even if content hash hasn't changed.",
     )
     parser.add_argument(
+        "--due-only",
+        action="store_true",
+        help="Only publish ready, unpublished articles whose publishAfter date is today or earlier.",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Maximum number of articles to process after filtering.",
+    )
+    parser.add_argument(
         "--verbose", "-v",
         action="store_true",
         help="Enable debug logging.",
@@ -99,6 +110,37 @@ def resolve_platforms(platform_arg: str | None) -> list[str]:
         else:
             logger.warning("Unknown platform '%s' — skipping", p)
     return selected
+
+
+def has_frontmatter_published_at(article: Article) -> bool:
+    return bool(str(article.raw_frontmatter.get("publishedAt", "")).strip())
+
+
+def is_already_posted(article: Article, state: PublishState) -> bool:
+    return has_frontmatter_published_at(article) or state.is_published_anywhere(article.slug)
+
+
+def filter_due_articles(
+    articles: list[Article],
+    state: PublishState,
+    limit: int | None = None,
+) -> list[Article]:
+    """Select ready, unpublished articles due by publishAfter, oldest date first."""
+    due = [
+        article
+        for article in articles
+        if article.is_ready_to_post
+        and article.is_due_to_publish()
+        and not is_already_posted(article, state)
+    ]
+    due.sort(key=lambda article: (article.publish_after, article.slug))
+
+    if limit is None:
+        return due
+    if limit < 1:
+        logger.warning("--limit must be at least 1; no articles selected")
+        return []
+    return due[:limit]
 
 
 def handle_preview(articles: list[Article], platforms: list[str]):
@@ -131,6 +173,8 @@ def handle_dry_run(articles: list[Article], platforms: list[str], state: Publish
         print(f"\n--- {article.slug} ---")
         print(f"  Title:     {article.title}")
         print(f"  Status:    {article.status}{'  ✓ will publish' if ready else '  ✗ skipped (not ready)'}")
+        print(f"  Due:       {article.publish_after.isoformat() if article.publish_after else '(none)'}")
+        print(f"  Posted:    {'yes' if is_already_posted(article, state) else 'no'}")
         print(f"  Canonical: {article.canonical_url}")
         print(f"  Hash:      {content_hash[:12]}...")
 
@@ -260,6 +304,8 @@ def main():
 
     logger.info("Discovered %d article(s): %s", len(articles), ", ".join(a.slug for a in articles))
 
+    state = PublishState(repo_root)
+
     ready = [a for a in articles if a.is_ready_to_post]
     not_ready = [a for a in articles if not a.is_ready_to_post]
     if not_ready:
@@ -269,6 +315,24 @@ def main():
         )
     if ready:
         logger.info("Ready to publish: %s", ", ".join(a.slug for a in ready))
+
+    if args.due_only:
+        articles = filter_due_articles(articles, state, args.limit)
+        if articles:
+            logger.info("Due to publish now: %s", ", ".join(a.slug for a in articles))
+        else:
+            logger.info("No unpublished articles are due to publish today")
+    elif args.limit is not None:
+        if args.limit < 1:
+            logger.warning("--limit must be at least 1; no articles selected")
+            articles = []
+        else:
+            articles = articles[:args.limit]
+            logger.info("Limited run to %d article(s): %s", len(articles), ", ".join(a.slug for a in articles))
+
+    if not articles:
+        logger.info("Nothing to publish.")
+        return
 
     # Resolve platforms
     platforms = resolve_platforms(args.platform)
@@ -282,9 +346,6 @@ def main():
     if args.preview:
         handle_preview(articles, platforms)
         return
-
-    # Dry run mode
-    state = PublishState(repo_root)
 
     if args.dry_run:
         handle_dry_run(articles, platforms, state)

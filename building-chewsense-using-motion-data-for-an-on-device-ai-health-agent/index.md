@@ -8,6 +8,8 @@ series: ChewSense
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/hero.png
 updatedAt: 2026-04-07
+status: ready to post
+publishAfter: 2026-07-05
 ---
 
 I did not build ChewSense in a straight line, and I definitely did not build it efficiently.
@@ -169,4 +171,3 @@ So that is where ChewSense stands for me right now. It started as a curiosity ab
 I am still working on it. More is coming. But this is the first version of the project that feels like it has earned its next step.
 
 I am still refining ChewSense, so the repos are the clearest way to see what is real, what is evolving, and what comes next. If you have built something similar, want to compare notes, or just want to follow the project, reach out on [LinkedIn](https://linkedin.com/in/zacharysturman), explore the work on [GitHub](https://github.com/zsturman), or start with these repos: [ChewSense-Collection](https://github.com/ZSturman/ChewSense-Collection), [ChewSense—Data-Collection-and-Labeling](https://github.com/ZSturman/ChewSense---Data-Collection-and-Labeling), and [Chew-Sense](https://github.com/ZSturman/Chew-Sense). More context on my broader work is at [zachary-sturman.com](https://zachary-sturman.com/).
-

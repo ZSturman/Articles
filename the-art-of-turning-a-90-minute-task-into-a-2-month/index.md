@@ -8,6 +8,8 @@ series: My Notion Pipeline
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/Concept_art_with_Logo.jpeg
 updatedAt: 2026-04-08
+status: ready to post
+publishAfter: 2026-07-19
 ---
 
 For the last few years, I kept returning to the same problem in slightly different forms.
@@ -221,4 +223,3 @@ If you want to see how I use Notion to track my projects, read:
 If you want a more in-depth look at the original app and code, or want to use any of it yourself, the repository is here:
 
 - [https://github.com/ZSturman/Folio-Studio](https://github.com/ZSturman/Folio-Studio)
-

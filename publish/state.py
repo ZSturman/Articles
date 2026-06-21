@@ -41,6 +41,10 @@ class PublishState:
         """Check if an article has ever been published to a platform."""
         return platform in self._data.get(slug, {})
 
+    def is_published_anywhere(self, slug: str) -> bool:
+        """Check if an article has any recorded platform publish."""
+        return any(key != "content_hash" for key in self._data.get(slug, {}))
+
     def needs_update(self, slug: str, current_hash: str) -> bool:
         """Check if the article content has changed since last publish."""
         stored = self._data.get(slug, {}).get("content_hash", "")

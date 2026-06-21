@@ -1,6 +1,9 @@
 name: Publish Articles
 
 on:
+  schedule:
+    - cron: "0 17 * * *"
+
   workflow_dispatch:
     inputs:
       slug:
@@ -19,12 +22,14 @@ on:
         description: "Force re-publish even if unchanged"
         type: boolean
         default: false
-
-  # Uncomment to auto-publish on push to main:
-  # push:
-  #   branches: [main]
-  #   paths:
-  #     - '*/index.md'
+      due_only:
+        description: "Only publish unpublished articles due by publishAfter"
+        type: boolean
+        default: false
+      limit:
+        description: "Maximum number of articles to publish"
+        required: false
+        default: ""
 
 jobs:
   publish:
@@ -48,21 +53,31 @@ jobs:
         id: cmd
         run: |
           CMD="python -m publish"
-          SLUG="${{ github.event.inputs.slug }}"
+          SLUG="${{ github.event.inputs.slug || 'all' }}"
           if [ "$SLUG" = "all" ] || [ -z "$SLUG" ]; then
             CMD="$CMD --all"
           else
             CMD="$CMD $SLUG"
           fi
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+          if [ "${{ github.event.inputs.dry_run || 'false' }}" = "true" ]; then
             CMD="$CMD --dry-run"
           fi
-          PLATFORMS="${{ github.event.inputs.platforms }}"
+          PLATFORMS="${{ github.event.inputs.platforms || 'all' }}"
           if [ -n "$PLATFORMS" ] && [ "$PLATFORMS" != "all" ]; then
             CMD="$CMD --platform $PLATFORMS"
           fi
-          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+          if [ "${{ github.event.inputs.force || 'false' }}" = "true" ]; then
             CMD="$CMD --force"
+          fi
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.due_only || 'false' }}" = "true" ]; then
+            CMD="$CMD --due-only"
+          fi
+          LIMIT="${{ github.event.inputs.limit }}"
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            LIMIT="1"
+          fi
+          if [ -n "$LIMIT" ]; then
+            CMD="$CMD --limit $LIMIT"
           fi
           echo "cmd=$CMD" >> "$GITHUB_OUTPUT"
 
@@ -81,6 +96,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .publish-state.json
+          git add .publish-state.json */index.md
           git diff --cached --quiet || git commit -m "Update publish state [skip ci]"
           git push

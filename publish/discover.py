@@ -2,6 +2,7 @@
 
 import re
 from dataclasses import dataclass, field
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -24,12 +25,18 @@ class Article:
     cover_image: str = ""
     series: str = ""
     status: str = "draft"
+    publish_after: date | None = None
     raw_frontmatter: dict = field(default_factory=dict)
     source_path: Path = field(default_factory=lambda: Path("."))
 
     @property
     def is_ready_to_post(self) -> bool:
         return self.status.strip().lower() == READY_STATUS
+
+    def is_due_to_publish(self, today: date | None = None) -> bool:
+        if self.publish_after is None:
+            return False
+        return self.publish_after <= (today or date.today())
 
     @property
     def index_path(self) -> Path:
@@ -76,6 +83,24 @@ def ensure_published_at(article: "Article", published_at: str) -> bool:
     article.index_path.write_text(serialized + "\n", encoding="utf-8")
     article.raw_frontmatter = updated_metadata
     return True
+
+
+def _parse_publish_after(value: Any) -> date | None:
+    """Parse publishAfter as a YYYY-MM-DD date when present."""
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+
+    text = str(value).strip()
+    if not text:
+        return None
+    try:
+        return date.fromisoformat(text[:10])
+    except ValueError:
+        return None
 
 
 def discover_articles(repo_root: Path, slugs: list[str] | None = None) -> list[Article]:
@@ -139,6 +164,7 @@ def _parse_article(folder: Path, index_file: Path) -> Article | None:
         cover_image=meta.get("cover_image", ""),
         series=meta.get("series", ""),
         status=str(meta.get("status", "draft")).strip(),
+        publish_after=_parse_publish_after(meta.get("publishAfter")),
         raw_frontmatter=meta,
         source_path=folder,
     )

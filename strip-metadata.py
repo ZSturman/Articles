@@ -39,7 +39,8 @@ ALLOWED_FIELDS_LOWER = {
     "cover image",
     "updatedat",
     "publishedat",
-    "status"
+    "status",
+    "publishafter",
 }
 
 MARKDOWN_INDEX_NAMES = {"index.md", "index.markdown"}
