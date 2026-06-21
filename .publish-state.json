@@ -28,6 +28,22 @@
       "url": "https://zacharysturman.hashnode.dev/building-a-location-first-learning-agent-to-explore-context-memory-and-consciousness"
     }
   },
+  "building-chewsense-using-motion-data-for-an-on-device-ai-health-agent": {
+    "content_hash": "51ec62fb34fc4be96be800a50b7c83cc8f9b9113d3486caba3d5ad449c6c37e7",
+    "devto": {
+      "id": "3956727",
+      "published_at": "2026-06-21T16:24:42.819673+00:00",
+      "url": "https://dev.to/zacharysturman/building-chewsense-using-motion-data-for-an-on-device-ai-health-agent-57d5"
+    }
+  },
+  "consolidating-an-offline-first-episodic-memory-system": {
+    "content_hash": "1711df39ad7b5f23425dae60c4a4b0e9bf7f0b981a1e177801a84ba594f3e7db",
+    "devto": {
+      "id": "3956729",
+      "published_at": "2026-06-21T16:24:45.483506+00:00",
+      "url": "https://dev.to/zacharysturman/consolidating-an-offline-first-episodic-memory-system-1cjc"
+    }
+  },
   "how-i-sync-my-portfolio-using-notion": {
     "content_hash": "8093c1433a554d07e9050cf4fa0de2f519c05204348ba4d1902a449a5cbdbf8c",
     "devto": {
@@ -42,6 +58,14 @@
       "id": "3956692",
       "published_at": "2026-06-21T16:16:54+00:00",
       "url": "https://dev.to/zacharysturman/how-i-use-notion-to-ingest-organize-and-track-my-projects-52a2"
+    }
+  },
+  "the-art-of-turning-a-90-minute-task-into-a-2-month": {
+    "content_hash": "8fe7908dae05c77f74a7073fc3ced52c881c04be0c782392c699a6167d299549",
+    "devto": {
+      "id": "3956730",
+      "published_at": "2026-06-21T16:25:24.062871+00:00",
+      "url": "https://dev.to/zacharysturman/the-art-of-turning-a-90-minute-task-into-a-2-month-automation-project-4gfp"
     }
   },
   "the-wolf-project-reworking-a-real-world-project": {

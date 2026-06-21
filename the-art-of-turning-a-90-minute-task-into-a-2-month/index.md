@@ -10,6 +10,7 @@ cover_image: images/Concept_art_with_Logo.jpeg
 updatedAt: 2026-04-08
 status: ready to post
 publishAfter: 2026-07-19
+publishedAt: 2026-06-21
 ---
 
 For the last few years, I kept returning to the same problem in slightly different forms.

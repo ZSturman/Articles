@@ -10,6 +10,7 @@ cover_image: images/hero.png
 updatedAt: 2026-04-11
 status: ready to post
 publishAfter: 2026-08-02
+publishedAt: 2026-06-21
 ---
 
 There is a point in some projects where separate experiments stop feeling separate, and start revealing themselves as parts of the same system.

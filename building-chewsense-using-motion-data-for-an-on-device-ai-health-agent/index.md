@@ -10,6 +10,7 @@ cover_image: images/hero.png
 updatedAt: 2026-04-07
 status: ready to post
 publishAfter: 2026-07-05
+publishedAt: 2026-06-21
 ---
 
 I did not build ChewSense in a straight line, and I definitely did not build it efficiently.
