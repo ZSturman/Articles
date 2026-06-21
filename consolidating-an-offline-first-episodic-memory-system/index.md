@@ -8,6 +8,7 @@ series: Engineering AI for Recognition and Memory
 platform: [DEV, Hashnode, Hashnoon, Medium]
 cover_image: images/hero.png
 updatedAt: 2026-04-11
+status: ready to post
 ---
 
 There is a point in some projects where separate experiments stop feeling separate, and start revealing themselves as parts of the same system.
