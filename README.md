@@ -161,6 +161,11 @@ The workflow runs automatically every day at 17:00 UTC and publishes at most one
 - **due_only**: check to publish only articles due by `publishAfter`
 - **limit**: maximum number of articles to publish
 
+Scheduled runs require at least one publishing platform secret to be configured:
+- DEV.to: `DEVTO_API_KEY`
+- Hashnode: `HASHNODE_TOKEN` and `HASHNODE_PUBLICATION_ID`
+- Medium: `MEDIUM_TOKEN`
+
 ---
 
 ## Publish State

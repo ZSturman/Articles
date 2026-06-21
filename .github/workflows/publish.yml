@@ -81,7 +81,32 @@ jobs:
           fi
           echo "cmd=$CMD" >> "$GITHUB_OUTPUT"
 
+      - name: Check publishing secrets
+        id: secrets
+        env:
+          HAS_DEVTO: ${{ secrets.DEVTO_API_KEY != '' }}
+          HAS_HASHNODE_TOKEN: ${{ secrets.HASHNODE_TOKEN != '' }}
+          HAS_HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID != '' }}
+          HAS_MEDIUM: ${{ secrets.MEDIUM_TOKEN != '' }}
+        run: |
+          HAS_PLATFORM="false"
+          if [ "$HAS_DEVTO" = "true" ]; then
+            HAS_PLATFORM="true"
+          fi
+          if [ "$HAS_HASHNODE_TOKEN" = "true" ] && [ "$HAS_HASHNODE_PUBLICATION_ID" = "true" ]; then
+            HAS_PLATFORM="true"
+          fi
+          if [ "$HAS_MEDIUM" = "true" ]; then
+            HAS_PLATFORM="true"
+          fi
+
+          echo "has_platform=$HAS_PLATFORM" >> "$GITHUB_OUTPUT"
+          if [ "$HAS_PLATFORM" != "true" ]; then
+            echo "::warning::No publishing platform secrets are configured. Add DEVTO_API_KEY, HASHNODE_TOKEN + HASHNODE_PUBLICATION_ID, or MEDIUM_TOKEN in repository secrets."
+          fi
+
       - name: Run publish
+        if: steps.secrets.outputs.has_platform == 'true'
         env:
           DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
           HASHNODE_TOKEN: ${{ secrets.HASHNODE_TOKEN }}
@@ -92,7 +117,7 @@ jobs:
         run: ${{ steps.cmd.outputs.cmd }} --verbose
 
       - name: Commit publish state
-        if: github.event.inputs.dry_run != 'true'
+        if: steps.secrets.outputs.has_platform == 'true' && github.event.inputs.dry_run != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
